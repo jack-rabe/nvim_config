@@ -37,7 +37,16 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
+  {
+    'ggandor/leap.nvim',
+    opts = { case_sensitive = false },
+    config = function()
+      require('leap').create_default_mappings()
+    end,
+  },
+  { 'ThePrimeagen/harpoon', opts = {} },
+  'tpope/vim-surround',
+  'tpope/vim-repeat',
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -83,7 +92,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -247,6 +256,10 @@ vim.o.hlsearch = true
 vim.wo.number = true
 vim.wo.relativenumber = true
 
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
@@ -305,27 +318,60 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+vim.keymap.set('n', 'ga', '<C-^>', { desc = 'Go to alternate file' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
+vim.keymap.set('n', '<leader>y', ':let @+ = expand("%")<cr>)', { desc = 'Yank filename' })
+
+-- Configure Harpoon keybinds
+local harpoon_ui = require('harpoon.ui')
+vim.keymap.set('n', "''", harpoon_ui.toggle_quick_menu, { desc = 'Open harpoon quick menu' })
+vim.keymap.set('n', "'a", function()
+  harpoon_ui.nav_file(1)
+end
+, { desc = 'Navigate to harpoon file 1' })
+vim.keymap.set('n', "'s", function()
+  harpoon_ui.nav_file(2)
+end
+, { desc = 'Navigate to harpoon file 2' })
+vim.keymap.set('n', "'d", function()
+  harpoon_ui.nav_file(3)
+end
+, { desc = 'Navigate to harpoon file 3' })
+vim.keymap.set('n', "'f", function()
+  harpoon_ui.nav_file(4)
+end
+, { desc = 'Navigate to next harpoon file' })
+vim.keymap.set('n', "'n", harpoon_ui.nav_next, { desc = 'Navigate to next harpoon file' })
+vim.keymap.set('n', "'p", harpoon_ui.nav_prev, { desc = 'Navigate to previous harpoon file' })
+vim.keymap.set('n', "'m", require('harpoon.mark').add_file, { desc = 'Harpoon add file' })
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+local actions = require('telescope.actions')
 require('telescope').setup {
   defaults = {
     mappings = {
       i = {
-        ["<C-n>"] = require('telescope.actions').cycle_history_next,
-        ["<C-p>"] = require('telescope.actions').cycle_history_prev,
-        ["<C-j>"] = require('telescope.actions').move_selection_next,
-        ["<C-k>"] = require('telescope.actions').move_selection_previous,
+        ["<C-n>"] = actions.cycle_history_next,
+        ["<C-p>"] = actions.cycle_history_prev,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
         ["<C-q>"] = function(...)
-          require('telescope.actions').smart_send_to_qflist(...)
-          require('telescope.actions').open_qflist(...)
+          actions.smart_send_to_qflist(...)
+          actions.open_qflist(...)
         end,
       },
       n = {
-        ["<C-n>"] = require('telescope.actions').move_selection_next,
-        ["<C-p>"] = require('telescope.actions').move_selection_previous,
+        ["<C-n>"] = actions.move_selection_next,
+        ["<C-p>"] = actions.move_selection_previous,
         ["<C-q>"] = function(...)
-          require('telescope.actions').smart_send_to_qflist(...)
-          require('telescope.actions').open_qflist(...)
+          actions.smart_send_to_qflist(...)
+          actions.open_qflist(...)
         end,
       },
     },
@@ -391,6 +437,7 @@ end
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+vim.keymap.set('n', '<leader>f', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
@@ -551,10 +598,11 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+  gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
+  tsserver = {},
+  tailwindcss = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
@@ -605,8 +653,11 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
+  -- prevent gopls from triggering pushes
+  preselect = 'None',
   completion = {
-    completeopt = 'menu,menuone,noinsert',
+    -- noselect makes it so that the first item is not selected by default (along with select = false below)
+    completeopt = 'menu,menuone,noinsert,noselect',
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -616,7 +667,7 @@ cmp.setup {
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      select = false,
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
