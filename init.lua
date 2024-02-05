@@ -42,13 +42,11 @@ require('lazy').setup({
   'tpope/vim-repeat',
   -- Git related plugins
   'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  -- 'tpope/vim-rhubarb',
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
   -- Useful plugin to show you pending keybinds.
   'folke/which-key.nvim',
-  -- gcc for comments
-  'numToStr/Comment.nvim',
 
   {
     'ggandor/leap.nvim',
@@ -106,6 +104,11 @@ require('lazy').setup({
     end,
   },
   {
+    "craftzdog/solarized-osaka.nvim",
+    name = "osaka",
+    lazy = true,
+  },
+  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
@@ -127,32 +130,36 @@ require('lazy').setup({
     main = 'ibl',
     opts = {},
   },
-  -- {
-  --   "folke/noice.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     -- add any options here
-  --     lsp = {
-  --       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-  --       override = {
-  --         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-  --         ["vim.lsp.util.stylize_markdown"] = true,
-  --         ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-  --       },
-  --     },
-  --     messages = {
-  --       view_search = false, -- view for search count messages. Set to `false` to disable
-  --     }
-  --   },
-  --   dependencies = {
-  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-  --     "MunifTanjim/nui.nvim",
-  --     -- OPTIONAL:
-  --     --   `nvim-notify` is only needed, if you want to use the notification view.
-  --     --   If not available, we use `mini` as the fallback
-  --     "rcarriga/nvim-notify",
-  --   },
-  -- },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add any options here
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+        },
+        progress = {
+          -- otherwise nvim-notify messes up rendering
+          enabled = false,
+        }
+      },
+      messages = {
+        view_search = false, -- view for search count messages. Set to `false` to disable
+      }
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view. (will mess up cursor renders within zellij)
+      --   If not available, we use `mini` as the fallback
+      -- "rcarriga/nvim-notify",
+    },
+  },
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
@@ -254,6 +261,7 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -327,7 +335,6 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', require('telescope.builtin').diagnostics, { desc = 'Open diagnostics in Telescope' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -386,18 +393,14 @@ require('telescope').setup {
         ["<C-p>"] = actions.cycle_history_prev,
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
-        ["<C-q>"] = function(...)
-          actions.smart_send_to_qflist(...)
-          actions.open_qflist(...)
-        end,
+        ["<C-a>"] = actions.send_to_qflist + actions.open_qflist,
+        ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
       },
       n = {
         ["<C-n>"] = actions.move_selection_next,
         ["<C-p>"] = actions.move_selection_previous,
-        ["<C-q>"] = function(...)
-          actions.smart_send_to_qflist(...)
-          actions.open_qflist(...)
-        end,
+        ["<C-a>"] = actions.send_to_qflist + actions.open_qflist,
+        ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
       },
     },
   },
@@ -459,10 +462,10 @@ local function telescope_live_grep_open_files()
     prompt_title = 'Live Grep in Open Files',
   }
 end
-vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
-vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>f', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+
+vim.keymap.set('n', '<leader>/', telescope_live_grep_open_files, { desc = 'Search in Open Files' })
+vim.keymap.set('n', '<leader>f', require('telescope.builtin').git_files, { desc = 'Search Git [F]iles' })
+vim.keymap.set('n', '<leader>st', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
@@ -470,6 +473,8 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>ss', require('telescope.builtin').lsp_document_symbols, { desc = 'Document [S]ymbols' })
+-- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -562,15 +567,13 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>r', vim.lsp.buf.rename, '[R]ename')
+  nmap('<leader>c', vim.lsp.buf.code_action, '[C]ode Action')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -578,11 +581,11 @@ local on_attach = function(_, bufnr)
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
+  -- nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+  -- nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+  -- nmap('<leader>wl', function()
+  --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  -- end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -592,14 +595,11 @@ end
 
 -- document existing key chains
 require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
   ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
 }
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
