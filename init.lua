@@ -113,6 +113,7 @@ require('lazy').setup({
     name = "osaka",
     lazy = true,
   },
+  { "stevearc/oil.nvim",     opts = {} },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
