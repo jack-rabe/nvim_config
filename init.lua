@@ -45,6 +45,7 @@ require('lazy').setup({
   'tpope/vim-sleuth',
   'folke/which-key.nvim',
 
+  { "stevearc/oil.nvim",     opts = {} },
   {
     'ggandor/leap.nvim',
     opts = { case_sensitive = false },
@@ -110,27 +111,6 @@ require('lazy').setup({
     name = "osaka",
     lazy = true,
   },
-  { "stevearc/oil.nvim",     opts = {} },
-  {
-    -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
-    opts = {
-      options = {
-        component_separators = '|',
-        section_separators = '',
-      },
-      sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch' },
-        lualine_c = { 'filename', 'diagnostics' },
-        lualine_x = { 'filetype' },
-        lualine_y = { 'diff' },
-        lualine_z = { 'location' }
-      },
-    },
-  },
-
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
@@ -138,41 +118,6 @@ require('lazy').setup({
     -- See `:help ibl`
     main = 'ibl',
     opts = {},
-  },
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {
-      -- add any options here
-      lsp = {
-        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-        },
-        progress = {
-          -- otherwise nvim-notify messes up rendering
-          enabled = false,
-        }
-      },
-      messages = {
-        view_search = false, -- view for search count messages. Set to `false` to disable
-      },
-      commands = {
-        history = {
-          view = "popup",
-        },
-      },
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view. (will mess up cursor renders within zellij)
-      --   If not available, we use `mini` as the fallback
-      -- "rcarriga/nvim-notify",
-    },
   },
   {
     'nvim-telescope/telescope.nvim',
@@ -194,80 +139,6 @@ require('lazy').setup({
     },
   },
   {
-    -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-      on_attach = function(bufnr)
-        local gs = package.loaded.gitsigns
-
-        local function map(mode, l, r, opts)
-          opts = opts or {}
-          opts.buffer = bufnr
-          vim.keymap.set(mode, l, r, opts)
-        end
-
-        -- Navigation
-        map({ 'n', 'v' }, ']c', function()
-          if vim.wo.diff then
-            return ']c'
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, desc = 'Jump to next hunk' })
-
-        map({ 'n', 'v' }, '[c', function()
-          if vim.wo.diff then
-            return '[c'
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, desc = 'Jump to previous hunk' })
-
-        -- Actions
-        -- visual mode
-        map('v', '<leader>hs', function()
-          gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = 'stage git hunk' })
-        map('v', '<leader>hr', function()
-          gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = 'reset git hunk' })
-        -- normal mode
-        map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
-        map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
-        map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
-        map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
-        map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
-        map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview git hunk' })
-        map('n', '<leader>hb', function()
-          gs.blame_line { full = false }
-        end, { desc = 'git blame line' })
-        map('n', '<leader>hd', gs.diffthis, { desc = 'git diff against index' })
-        map('n', '<leader>hD', function()
-          gs.diffthis '~'
-        end, { desc = 'git diff against last commit' })
-
-        -- Toggles
-        map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
-        map('n', '<leader>td', gs.toggle_deleted, { desc = 'toggle git show deleted' })
-
-        -- Text object
-        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
-      end,
-    },
-  },
-  {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
@@ -280,7 +151,10 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  require 'kickstart.plugins.autoformat'
+  require 'kickstart.plugins.autoformat',
+  require('custom.plugins.lualine'),
+  require('custom.plugins.gitsigns'),
+  require('custom.plugins.noice')
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -292,6 +166,7 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {})
 
+-- import keymaps TODO remove
 require('custom.plugins')
 
 -- [[ Setting options ]]
@@ -373,8 +248,11 @@ vim.keymap.set('n', '<C-l>', '<C-w>l')
 vim.keymap.set('n', '<leader>y', ':let @+ = expand("%")<cr>)', { desc = 'Yank filename' })
 vim.keymap.set('n', '<leader>w', function() vim.api.nvim_command("write") end)
 vim.keymap.set('n', '<leader>q', function() vim.api.nvim_command("quit") end)
-vim.keymap.set("n", "<leader>n", function()
+vim.keymap.set("n", "<leader>nh", function()
   require("noice").cmd("history")
+end)
+vim.keymap.set("n", "<leader>nl", function()
+  require("noice").cmd("last")
 end)
 
 -- [[ Configure Telescope ]]
