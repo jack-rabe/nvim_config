@@ -40,12 +40,9 @@ require('lazy').setup({
   'ThePrimeagen/harpoon',
   'tpope/vim-surround',
   'tpope/vim-repeat',
-  -- Git related plugins
   'tpope/vim-fugitive',
-  -- 'tpope/vim-rhubarb',
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-  -- Useful plugin to show you pending keybinds.
   'folke/which-key.nvim',
 
   {
@@ -161,7 +158,12 @@ require('lazy').setup({
       },
       messages = {
         view_search = false, -- view for search count messages. Set to `false` to disable
-      }
+      },
+      commands = {
+        history = {
+          view = "popup",
+        },
+      },
     },
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -290,6 +292,8 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {})
 
+require('custom.plugins')
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -367,32 +371,11 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 vim.keymap.set('n', '<leader>y', ':let @+ = expand("%")<cr>)', { desc = 'Yank filename' })
--- vim.keymap.set('n', '<leader>w', ':w<cr>')
 vim.keymap.set('n', '<leader>w', function() vim.api.nvim_command("write") end)
 vim.keymap.set('n', '<leader>q', function() vim.api.nvim_command("quit") end)
-
--- Configure Harpoon keybinds
-local harpoon_ui = require('harpoon.ui')
-vim.keymap.set('n', "''", harpoon_ui.toggle_quick_menu, { desc = 'Open harpoon quick menu' })
-vim.keymap.set('n', "'a", function()
-  harpoon_ui.nav_file(1)
-end
-, { desc = 'Navigate to harpoon file 1' })
-vim.keymap.set('n', "'s", function()
-  harpoon_ui.nav_file(2)
-end
-, { desc = 'Navigate to harpoon file 2' })
-vim.keymap.set('n', "'d", function()
-  harpoon_ui.nav_file(3)
-end
-, { desc = 'Navigate to harpoon file 3' })
-vim.keymap.set('n', "'f", function()
-  harpoon_ui.nav_file(4)
-end
-, { desc = 'Navigate to next harpoon file' })
-vim.keymap.set('n', "'n", harpoon_ui.nav_next, { desc = 'Navigate to next harpoon file' })
-vim.keymap.set('n', "'p", harpoon_ui.nav_prev, { desc = 'Navigate to previous harpoon file' })
-vim.keymap.set('n', "'m", require('harpoon.mark').add_file, { desc = 'Harpoon add file' })
+vim.keymap.set("n", "<leader>n", function()
+  require("noice").cmd("history")
+end)
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
