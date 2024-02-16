@@ -1,3 +1,10 @@
+vim.keymap.set("n", "<leader>nh", function()
+    require("noice").cmd("history")
+end, { desc = "[N]oice [H]istory" })
+vim.keymap.set("n", "<leader>nl", function()
+    require("noice").cmd("last")
+end, { desc = "[N]oice [L]ast" })
+
 return {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -15,8 +22,11 @@ return {
                 enabled = false,
             }
         },
+
         messages = {
-            view_search = false, -- view for search count messages. Set to `false` to disable
+            view_search = false,   -- view for search count messages. Set to `false` to disable
+            view = "notify",       -- default view for messages
+            view_error = "notify", -- view for errors
         },
         commands = {
             history = {
