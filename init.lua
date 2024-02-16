@@ -96,7 +96,8 @@ require('lazy').setup({
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 1000,
+    lazy = true,
+    -- priority = 1000,
     opts = {
       styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
         comments = { "italic" },
@@ -110,6 +111,17 @@ require('lazy').setup({
     "craftzdog/solarized-osaka.nvim",
     name = "osaka",
     lazy = true,
+  },
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    -- lazy = true,
+    config = function()
+      require('onedark').setup {
+        style = 'darker', -- dark, darker, cool, deep, warm, warmer, light
+      }
+      require('onedark').load()
+    end
   },
   {
     -- Add indentation guides even on blank lines
