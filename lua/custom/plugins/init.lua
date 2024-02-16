@@ -20,3 +20,7 @@ end
 vim.keymap.set('n', "'n", harpoon_ui.nav_next, { desc = 'Navigate to next harpoon file' })
 vim.keymap.set('n', "'p", harpoon_ui.nav_prev, { desc = 'Navigate to previous harpoon file' })
 vim.keymap.set('n', "'m", require('harpoon.mark').add_file, { desc = 'Harpoon add file' })
+
+-- Oil keymaps
+vim.keymap.set("n", "<leader>oo", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+vim.keymap.set("n", "<leader>of", "<CMD>Oil --float .<CR>", { desc = "Open parent directory" })
