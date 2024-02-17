@@ -37,7 +37,6 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  'ThePrimeagen/harpoon',
   'tpope/vim-surround',
   'tpope/vim-repeat',
   'tpope/vim-fugitive',
@@ -163,6 +162,7 @@ require('lazy').setup({
   require('custom.plugins.lualine'),
   require('custom.plugins.gitsigns'),
   require('custom.plugins.noice'),
+  require('custom.plugins.harpoon')
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -175,8 +175,8 @@ require('lazy').setup({
 }, {})
 
 -- TODO cleanup keymaps file
-require('custom.plugins')
 require('custom.plugins.telescope')
+require('custom.plugins.oil')
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
