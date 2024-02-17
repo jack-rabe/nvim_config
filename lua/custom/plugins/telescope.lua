@@ -5,7 +5,7 @@ local builtins = require('telescope.builtin')
 
 require('telescope').setup {
   defaults = {
-    layout_config = { prompt_position = 'top', height = .95, width = .95, preview_width = .65 },
+    layout_config = { prompt_position = 'top', height = .95, width = .95, preview_width = .4 },
     sorting_strategy = 'ascending',
     mappings = {
       i = {

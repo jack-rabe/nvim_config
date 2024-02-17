@@ -36,6 +36,16 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
     end,
 })
 
+local function get_harpoon_files()
+    local items = require('harpoon'):list().items
+    local filenames = {}
+    for idx, item in pairs(items) do
+        table.insert(filenames, idx .. " " .. item.value)
+    end
+    local res = table.concat(filenames, " | ")
+    return res
+end
+
 return {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -44,16 +54,17 @@ return {
         options = {
             component_separators = '|',
             section_separators = '',
+            globalstatus = true
         },
         sections = {
             lualine_a = { 'mode', },
-            lualine_b = { 'branch', },
-            lualine_c = { 'filename', 'diagnostics', {
+            lualine_b = { 'branch' },
+            lualine_c = { 'filename', 'diff', 'diagnostics', {
                 "macro-recording",
                 fmt = show_macro_recording,
             } },
-            lualine_x = { 'filetype' },
-            lualine_y = { 'diff' },
+            lualine_x = { get_harpoon_files, },
+            lualine_y = { 'filetype' },
             lualine_z = { 'location' }
         },
     },
