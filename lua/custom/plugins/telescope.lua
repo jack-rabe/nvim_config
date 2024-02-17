@@ -73,9 +73,9 @@ local function telescope_live_grep_open_files()
 end
 
 vim.keymap.set('n', '<leader>?', builtins.oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader>f', builtins.git_files, { desc = 'Search Git [F]iles' })
 vim.keymap.set('n', '<leader><space>', builtins.buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>so', telescope_live_grep_open_files, { desc = '[S]earch in [O]pen Files' })
-vim.keymap.set('n', '<leader>f', builtins.git_files, { desc = 'Search Git [F]iles' })
 vim.keymap.set('n', '<leader>st', builtins.builtin, { desc = '[S]earch [T]elescope' })
 vim.keymap.set('n', '<leader>sf', builtins.find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', builtins.help_tags, { desc = '[S]earch [H]elp' })
@@ -87,3 +87,5 @@ vim.keymap.set('n', '<leader>sr', builtins.resume, { desc = '[S]earch [R]esume' 
 vim.keymap.set('n', '<leader>ss', builtins.lsp_document_symbols, { desc = 'Document [S]ymbols' })
 vim.keymap.set('n', '<leader>sc', builtins.command_history, { desc = '[C]ommand History' })
 vim.keymap.set('n', '<leader>sy', builtins.lsp_dynamic_workspace_symbols, { desc = 'Workspace Symbols' })
+
+vim.keymap.set('n', '<leader>gb', builtins.git_branches, { desc = 'Git [B]ranches' })
