@@ -46,13 +46,6 @@ require('lazy').setup({
 
   { "stevearc/oil.nvim",     opts = {} },
   {
-    'ggandor/leap.nvim',
-    opts = { case_sensitive = false },
-    config = function()
-      require('leap').create_default_mappings()
-    end,
-  },
-  {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     opts = {}
@@ -162,7 +155,8 @@ require('lazy').setup({
   require('custom.plugins.lualine'),
   require('custom.plugins.gitsigns'),
   require('custom.plugins.noice'),
-  require('custom.plugins.harpoon')
+  require('custom.plugins.harpoon'),
+  require('custom.plugins.flash')
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -409,6 +403,7 @@ local servers = {
   -- clangd = {},
   gopls = {},
   jdtls = {},
+  hls = {},
   -- pyright = {},
   -- rust_analyzer = {},
   tsserver = {},

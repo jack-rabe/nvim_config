@@ -9,6 +9,10 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
+        presets = {
+            bottom_search = true,
+            lsp_doc_border = true
+        },
         -- add any options here
         lsp = {
             -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
