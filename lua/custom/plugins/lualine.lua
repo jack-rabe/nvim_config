@@ -38,18 +38,17 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 
 local function get_harpoon_files()
   local items = require('harpoon'):list().items
-  local filenames = { "%0*" }
+  local filenames = {}
   local keys = { 'a', 's', 'd', 'f' }
   local current_file = vim.fn.expand('%:p')
   for idx, item in pairs(items) do
-    if idx > 4 then
-      break
-    end
+    if idx > 4 then break end
+
     local path_in_repo = item.value
     local filename = path_in_repo:match("[^/]+$")
     local file_is_active = current_file:match(".*" .. path_in_repo) ~= nil
     if file_is_active then
-      table.insert(filenames, "%#StatusLineTerm# [" .. keys[idx] .. "] " .. filename .. " %0*")
+      table.insert(filenames, " <" .. keys[idx] .. "> " .. filename)
     else
       table.insert(filenames, " [" .. keys[idx] .. "] " .. filename)
     end
@@ -71,21 +70,10 @@ return {
     sections = {
       lualine_a = { 'mode', },
       lualine_b = { 'branch' },
-      lualine_c = { 'filename', 'diagnostics', {
-        "macro-recording",
-        fmt = show_macro_recording,
-      } },
-      lualine_x = { 'diff' },
+      lualine_c = { 'filename', 'diagnostics', 'diff', show_macro_recording, },
+      lualine_x = { get_harpoon_files },
       lualine_y = { 'filetype' },
       lualine_z = { 'location' }
     },
-    tabline = {
-      lualine_a = {},
-      lualine_b = { get_harpoon_files },
-      lualine_c = { 'diagnostics' },
-      lualine_x = {},
-      lualine_y = {},
-      lualine_z = { 'filename' }
-    }
   },
 }
