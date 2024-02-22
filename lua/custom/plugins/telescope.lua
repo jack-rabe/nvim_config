@@ -4,8 +4,13 @@ local actions = require('telescope.actions')
 local builtins = require('telescope.builtin')
 
 require('telescope').setup {
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {}
+    }
+  },
   defaults = {
-    layout_config = { prompt_position = 'top', height = .95, width = .95, preview_width = .4 },
+    layout_config = { horizontal = { prompt_position = 'top', height = .95, width = .95, preview_width = .4 } },
     sorting_strategy = 'ascending',
     mappings = {
       i = {
@@ -26,8 +31,8 @@ require('telescope').setup {
   },
 }
 
--- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+pcall(require("telescope").load_extension, "ui-select")
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
@@ -83,9 +88,10 @@ vim.keymap.set('n', '<leader>sw', builtins.grep_string, { desc = '[S]earch curre
 vim.keymap.set('n', '<leader>sg', builtins.live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', builtins.diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sr', builtins.resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>sr', builtins.registers, { desc = '[S]earch [R]egisters' })
 vim.keymap.set('n', '<leader>ss', builtins.lsp_document_symbols, { desc = 'Document [S]ymbols' })
 vim.keymap.set('n', '<leader>sc', builtins.command_history, { desc = '[C]ommand History' })
 vim.keymap.set('n', '<leader>sy', builtins.lsp_dynamic_workspace_symbols, { desc = 'Workspace Symbols' })
+vim.keymap.set('n', '<leader>su', builtins.resume, { desc = '[S]earch Resume' })
 
 vim.keymap.set('n', '<leader>gb', builtins.git_branches, { desc = 'Git [B]ranches' })

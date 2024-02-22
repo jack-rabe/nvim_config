@@ -105,15 +105,17 @@ require('lazy').setup({
     lazy = true,
   },
   {
-    'navarasu/onedark.nvim',
+    "folke/tokyonight.nvim",
+    lazy = false,
     priority = 1000,
-    -- lazy = true,
     config = function()
-      require('onedark').setup {
-        style = 'darker', -- dark, darker, cool, deep, warm, warmer, light
-      }
-      require('onedark').load()
-    end
+      local colors = require("tokyonight.colors").setup()
+      -- on_highlights function only contains some of the Flash.nvim highlight groups
+      vim.cmd('highlight FlashCurrent guibg=' .. colors.yellow)
+      vim.cmd('highlight FlashMatch gui=italic guibg=' .. colors.blue)
+      vim.cmd('highlight FlashCursor gui=bold guifg=#ffffff guibg=' .. colors.black)
+      vim.cmd.colorscheme 'tokyonight-night'
+    end,
   },
   {
     -- Add indentation guides even on blank lines
@@ -137,6 +139,7 @@ require('lazy').setup({
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-ui-select.nvim',
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
       -- Only load if `make` is available. Make sure you have the system
       -- requirements installed.
@@ -249,7 +252,7 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 vim.keymap.set('n', '<leader>y', ':let @+ = expand("%")<cr>)', { desc = '[Y]ank filename' })
-vim.keymap.set('n', '<leader>w', function() vim.api.nvim_command("write") end, { desc = '[W]rite file' })
+vim.keymap.set('n', '<leader>w', function() vim.api.nvim_command("update") end, { desc = '[W]rite file' })
 vim.keymap.set('n', '<leader>q', function() vim.api.nvim_command("quit") end, { desc = '[Q]uit' })
 
 
@@ -259,7 +262,7 @@ vim.keymap.set('n', '<leader>q', function() vim.api.nvim_command("quit") end, { 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'java', 'haskell' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -404,7 +407,7 @@ local servers = {
   gopls = {},
   jdtls = {},
   hls = {},
-  -- pyright = {},
+  pyright = {},
   -- rust_analyzer = {},
   tsserver = {},
   tailwindcss = {},
