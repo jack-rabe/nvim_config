@@ -37,24 +37,35 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 })
 
 local function get_harpoon_files()
-  local items = require('harpoon'):list().items
   local filenames = {}
   local keys = { 'a', 's', 'd', 'f' }
   local current_file = vim.fn.expand('%:p')
-  for idx, item in pairs(items) do
+  local harpooned_files = require('harpoon'):list().items
+
+  for idx, harpooned_file in pairs(harpooned_files) do
     if idx > 4 then break end
 
-    local path_in_repo = item.value
+    local path_in_repo = harpooned_file.value
     local filename = path_in_repo:match("[^/]+$")
     local file_is_active = current_file:match(".*" .. path_in_repo) ~= nil
     if file_is_active then
-      table.insert(filenames, " <" .. keys[idx] .. "> " .. filename)
+      table.insert(filenames, "<" .. keys[idx] .. "> " .. filename)
     else
-      table.insert(filenames, " [" .. keys[idx] .. "] " .. filename)
+      table.insert(filenames, "[" .. keys[idx] .. "] " .. filename)
     end
   end
-  local res = table.concat(filenames, " | ")
-  return res
+
+  local result = ""
+  local max_width = vim.o.columns * 2 / 5
+  for _, filename in pairs(filenames) do
+    local tmp = result .. " | " .. filename
+    if string.len(tmp) < max_width then
+      result = tmp
+    else
+      return result .. "| ..."
+    end
+  end
+  return result
 end
 
 return {
