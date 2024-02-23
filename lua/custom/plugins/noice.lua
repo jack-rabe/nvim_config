@@ -1,10 +1,3 @@
-vim.keymap.set("n", "<leader>nh", function()
-    require("noice").cmd("history")
-end, { desc = "[N]oice [H]istory" })
-vim.keymap.set("n", "<leader>nl", function()
-    require("noice").cmd("last")
-end, { desc = "[N]oice [L]ast" })
-
 return {
     "folke/noice.nvim",
     event = "VeryLazy",

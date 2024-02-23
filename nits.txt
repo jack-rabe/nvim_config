@@ -1,0 +1,5 @@
+Oil exiting on save (only for <leader>w)
+help docs opening in split
+my harpoon stl could be prettier
+comment highlight group applied to flash
+can't see diagnostics and gitsigns at the same time
