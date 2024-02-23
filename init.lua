@@ -1,14 +1,3 @@
---[[
-  If you don't know anything about Lua, I recommend taking some time to read through
-  a guide. One possible example:
-  - https://learnxinyminutes.com/docs/lua/
-  And then you can explore or search through `:help lua-guide`
-  - https://neovim.io/doc/user/lua-guide.html
---]]
-
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -35,17 +24,10 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   'tpope/vim-surround',
   'tpope/vim-repeat',
-  'tpope/vim-fugitive',
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
   'folke/which-key.nvim',
 
-  { "stevearc/oil.nvim",     opts = {} },
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    opts = {}
-  },
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -64,7 +46,6 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -82,47 +63,8 @@ require('lazy').setup({
     },
   },
   {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
-  },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    lazy = true,
-    -- priority = 1000,
-    opts = {
-      styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-        comments = { "italic" },
-      },
-    },
-    config = function()
-      vim.cmd.colorscheme 'catppuccin'
-    end,
-  },
-  {
-    "craftzdog/solarized-osaka.nvim",
-    name = "osaka",
-    lazy = true,
-  },
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      local colors = require("tokyonight.colors").setup()
-      -- on_highlights function only contains some of the Flash.nvim highlight groups
-      vim.cmd('highlight FlashCurrent guibg=' .. colors.yellow)
-      vim.cmd('highlight FlashMatch gui=italic guibg=' .. colors.blue)
-      vim.cmd('highlight FlashCursor gui=bold guifg=#ffffff guibg=' .. colors.black)
-      vim.cmd.colorscheme 'tokyonight-night'
-    end,
-  },
-  {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
     main = 'ibl',
     opts = {},
   },
@@ -134,7 +76,7 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',  opts = {} },
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
@@ -162,12 +104,12 @@ require('lazy').setup({
 
 
 -- [[ Highlight on yank ]]
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+local yank_highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank({ timeout = 75 })
   end,
-  group = highlight_group,
+  group = yank_highlight_group,
   pattern = '*',
 })
 
@@ -197,6 +139,15 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    buffer = bufnr,
+    callback = vim.lsp.buf.document_highlight
+  })
+  vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+    buffer = bufnr,
+    callback = vim.lsp.buf.clear_references
+  })
 end
 
 -- document existing key chains

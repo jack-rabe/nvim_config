@@ -2,11 +2,12 @@
 -- See `:help telescope` and `:help telescope.setup()`
 local actions = require('telescope.actions')
 local builtins = require('telescope.builtin')
+local themes = require('telescope.themes')
 
 require('telescope').setup {
   extensions = {
     ["ui-select"] = {
-      require("telescope.themes").get_dropdown {}
+      themes.get_dropdown {}
     }
   },
   defaults = {
@@ -29,6 +30,17 @@ require('telescope').setup {
       },
     },
   },
+  pickers = {
+    command_history = {
+      theme = "ivy",
+    },
+    builtin = {
+      theme = "ivy",
+    },
+    registers = {
+      theme = "ivy",
+    }
+  }
 }
 
 pcall(require('telescope').load_extension, 'fzf')
@@ -77,21 +89,30 @@ local function telescope_live_grep_open_files()
   }
 end
 
-vim.keymap.set('n', '<leader>?', builtins.oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader>f', builtins.git_files, { desc = 'Search Git [F]iles' })
-vim.keymap.set('n', '<leader><space>', builtins.buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>so', telescope_live_grep_open_files, { desc = '[S]earch in [O]pen Files' })
-vim.keymap.set('n', '<leader>st', builtins.builtin, { desc = '[S]earch [T]elescope' })
-vim.keymap.set('n', '<leader>sf', builtins.find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', builtins.help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', builtins.grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', builtins.live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
-vim.keymap.set('n', '<leader>sd', builtins.diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sr', builtins.registers, { desc = '[S]earch [R]egisters' })
-vim.keymap.set('n', '<leader>ss', builtins.lsp_document_symbols, { desc = 'Document [S]ymbols' })
-vim.keymap.set('n', '<leader>sc', builtins.command_history, { desc = '[C]ommand History' })
-vim.keymap.set('n', '<leader>sy', builtins.lsp_dynamic_workspace_symbols, { desc = 'Workspace Symbols' })
-vim.keymap.set('n', '<leader>su', builtins.resume, { desc = '[S]earch Resume' })
 
-vim.keymap.set('n', '<leader>gb', builtins.git_branches, { desc = 'Git [B]ranches' })
+local nmap = function(keys, func, desc)
+  if desc then
+    desc = desc
+  end
+  vim.keymap.set('n', '<leader>' .. keys, func, { desc = desc })
+end
+
+nmap('?', builtins.oldfiles, '[?] Find recently opened files')
+nmap('f', builtins.git_files, 'Search Git [F]iles')
+nmap('<space>', builtins.buffers, '[ ] Find existing buffers')
+nmap('so', telescope_live_grep_open_files, '[S]earch in [O]pen Files')
+nmap('st', builtins.builtin, '[S]earch [T]elescope')
+nmap('sf', builtins.find_files, '[S]earch [F]iles')
+nmap('sh', builtins.help_tags, '[S]earch [H]elp')
+nmap('sw', builtins.grep_string, '[S]earch current [W]ord')
+nmap('sg', builtins.live_grep, '[S]earch by [G]rep')
+nmap('sG', ':LiveGrepGitRoot<cr>', '[S]earch by [G]rep on Git Root')
+nmap('sd', builtins.diagnostics, '[S]earch [D]iagnostics')
+nmap('sr', builtins.registers, '[S]earch [R]egisters')
+nmap('ss', builtins.lsp_document_symbols, 'Document [S]ymbols')
+nmap('sc', builtins.command_history, '[C]ommand History')
+nmap('sy', builtins.lsp_dynamic_workspace_symbols, 'Workspace Symbols')
+nmap('su', builtins.resume, '[S]earch Resume')
+
+nmap('gb', builtins.git_branches, '[G]it [B]ranches')
+nmap('gs', builtins.git_status, '[G]it [S]tatus')

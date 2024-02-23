@@ -1,5 +1,6 @@
 Oil exiting on save (only for <leader>w)
 help docs opening in split
 my harpoon stl could be prettier
-comment highlight group applied to flash
+comment highlight group applied to flash (make highlights nicer/general for all themes)
 can't see diagnostics and gitsigns at the same time
+tab for both snippets and completion cycling
