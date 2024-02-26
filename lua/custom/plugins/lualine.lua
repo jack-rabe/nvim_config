@@ -44,13 +44,15 @@ local function get_lsp()
   if next(clients) == nil then
     return msg
   end
+
+  local names = {}
   for _, client in ipairs(clients) do
     local filetypes = client.config.filetypes
     if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-      return client.name
+      table.insert(names, client.name)
     end
   end
-  return msg
+  return table.concat(names, " | ")
 end
 
 local function get_harpoon_files()

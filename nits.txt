@@ -5,3 +5,4 @@ comment highlight group applied to flash (make highlights nicer/general for all 
 can't see diagnostics and gitsigns at the same time
 tab for both snippets and completion cycling
 hidden files - telescope + and oil?
+nicer cmp border and format
