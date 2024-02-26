@@ -99,10 +99,22 @@ return {
     sections = {
       lualine_a = { 'mode', },
       lualine_b = { 'branch' },
-      lualine_c = { 'filename', 'diagnostics', 'diff', show_macro_recording, },
-      lualine_x = { get_harpoon_files },
+      lualine_c = { 'filename', 'diagnostics', show_macro_recording, },
+      lualine_x = { 'diff', get_lsp },
       lualine_y = { 'filetype' },
       lualine_z = { 'location' }
     },
+    tabline = {
+      lualine_a = { {
+        'buffers',
+        max_length = vim.o.columns * 2 / 5,
+        hide_filename_extension = true,
+      } },
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = { get_harpoon_files },
+      lualine_y = {},
+      lualine_z = {}
+    }
   },
 }

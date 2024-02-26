@@ -99,7 +99,7 @@ end
 
 nmap('?', builtins.oldfiles, '[?] Find recently opened files')
 nmap('f', builtins.git_files, 'Search Git [F]iles')
-nmap('<space>', builtins.buffers, '[ ] Find existing buffers')
+nmap('sb', builtins.buffers, 'Find existing buffers')
 nmap('so', telescope_live_grep_open_files, '[S]earch in [O]pen Files')
 nmap('st', builtins.builtin, '[S]earch [T]elescope')
 nmap('sf', builtins.find_files, '[S]earch [F]iles')
@@ -113,6 +113,7 @@ nmap('ss', builtins.lsp_document_symbols, 'Document [S]ymbols')
 nmap('sc', builtins.command_history, '[C]ommand History')
 nmap('sy', builtins.lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 nmap('su', builtins.resume, '[S]earch Resume')
+nmap('<space>', builtins.current_buffer_fuzzy_find, 'Current buffer fuzzy find')
 
 nmap('gb', builtins.git_branches, '[G]it [B]ranches')
 nmap('gs', builtins.git_status, '[G]it [S]tatus')
