@@ -6,3 +6,7 @@ can't see diagnostics and gitsigns at the same time
 tab for both snippets and completion cycling
 hidden files - telescope + and oil?
 nicer cmp border and format
+noice - if i use, hide write messages?
+view hidden files (and OIL!) telescope (e.g. .gitignore)
+gx isn't working
+ctrl y , e for scrolling (tmux conflict)
