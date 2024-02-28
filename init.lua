@@ -22,11 +22,18 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
+  -- 'ray-x/aurora',
   'tpope/vim-surround',
   'tpope/vim-repeat',
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
   'folke/which-key.nvim',
+  {
+    "folke/todo-comments.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {}
+  },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -132,7 +139,7 @@ local on_attach = function(_, bufnr)
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<C-m>', vim.lsp.buf.signature_help, 'Signature Documentation')
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
   -- Create a command `:Format` local to the LSP buffer
@@ -140,11 +147,17 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 
+
   vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
     buffer = bufnr,
-    callback = vim.lsp.buf.document_highlight
+    callback = function()
+      local tokens = vim.lsp.semantic_tokens.get_at_pos()
+      if tokens ~= nil then
+        vim.lsp.buf.document_highlight()
+      end
+    end
   })
-  vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+  vim.api.nvim_create_autocmd({ 'CursorMoved', "CursorMovedI" }, {
     buffer = bufnr,
     callback = vim.lsp.buf.clear_references
   })
@@ -180,14 +193,15 @@ require('mason-lspconfig').setup()
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
+  clangd = {},
   gopls = {},
   jdtls = {},
   hls = {},
   pyright = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {},
   tsserver = {},
   tailwindcss = {},
+  html = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {

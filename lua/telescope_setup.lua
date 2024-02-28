@@ -114,6 +114,7 @@ nmap('sc', builtins.command_history, '[C]ommand History')
 nmap('sy', builtins.lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 nmap('su', builtins.resume, '[S]earch Resume')
 nmap('<space>', builtins.current_buffer_fuzzy_find, 'Current buffer fuzzy find')
+nmap('sH', function() builtins.find_files({ hidden = true }) end, 'Search [H]idden Files')
 
 nmap('gb', builtins.git_branches, '[G]it [B]ranches')
 nmap('gs', builtins.git_status, '[G]it [S]tatus')
