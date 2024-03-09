@@ -99,7 +99,7 @@ return {
       globalstatus = true
     },
     sections = {
-      lualine_a = { 'mode', },
+      lualine_a = { 'mode' },
       lualine_b = { 'branch' },
       lualine_c = { 'filename', 'diagnostics', show_macro_recording, },
       lualine_x = { 'diff', get_lsp },
@@ -116,7 +116,7 @@ return {
       lualine_c = {},
       lualine_x = { get_harpoon_files },
       lualine_y = {},
-      lualine_z = {}
+      lualine_z = { 'searchcount' }
     }
   },
 }

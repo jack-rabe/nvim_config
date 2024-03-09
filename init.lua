@@ -239,6 +239,19 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+local function setFlashCursorColor()
+  vim.cmd([[highlight clear FlashCursor]])
+  vim.cmd([[highlight FlashCursor guibg=white guifg=black]])
+end
+setFlashCursorColor()
+
+local switch_flash_highlights = vim.api.nvim_create_augroup('SwitchFlashHighlights', {})
+vim.api.nvim_create_autocmd('ColorScheme', {
+  callback = setFlashCursorColor,
+  group = switch_flash_highlights,
+  pattern = '*',
+})
+
 require('options')
 require('treesitter_setup')
 require('cmp_setup')
