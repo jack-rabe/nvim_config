@@ -38,11 +38,10 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 
 -- shows the names of attached lsp clients
 local function get_lsp()
-  local msg = ''
   local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
   local clients = vim.lsp.get_active_clients()
   if next(clients) == nil then
-    return msg
+    return ''
   end
 
   local names = {}

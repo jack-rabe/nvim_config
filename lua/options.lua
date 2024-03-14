@@ -1,6 +1,7 @@
 -- [[ setting options]]
 vim.o.hlsearch = true
 vim.wo.number = true
+vim.opt.scrolloff = 3
 vim.wo.relativenumber = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4

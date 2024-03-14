@@ -11,7 +11,18 @@ require('telescope').setup {
     }
   },
   defaults = {
-    layout_config = { horizontal = { prompt_position = 'top', height = .95, width = .95, preview_width = .4 } },
+    layout_config = {
+      horizontal = {
+        prompt_position = 'top',
+        height = .8,
+        width = .95,
+        preview_width = .5
+      },
+      center = {
+        anchor = "S",
+        width = 0.7
+      },
+    },
     sorting_strategy = 'ascending',
     mappings = {
       i = {
@@ -32,13 +43,13 @@ require('telescope').setup {
   },
   pickers = {
     command_history = {
-      theme = "ivy",
+      theme = "ivy"
     },
-    builtin = {
-      theme = "ivy",
+    lsp_references = {
+      layout_strategy = 'center'
     },
-    registers = {
-      theme = "ivy",
+    diagnostics = {
+      layout_strategy = 'center'
     }
   }
 }
