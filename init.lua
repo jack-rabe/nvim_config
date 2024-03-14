@@ -22,7 +22,23 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- 'ray-x/aurora',
+  {
+    "EdenEast/nightfox.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colo('carbonfox')
+    end
+  },
+  -- {
+  --   'rebelot/kanagawa.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colo('kanagawa')
+  --   end
+  -- },
+  'mbbill/undotree',
   'tpope/vim-surround',
   'tpope/vim-repeat',
   -- Detect tabstop and shiftwidth automatically
@@ -37,14 +53,6 @@ require('lazy').setup({
     end,
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true, -- default settings
-  },
-  {
-    "folke/todo-comments.nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {
-      signs = false
-    }
   },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
@@ -142,8 +150,9 @@ local on_attach = function(_, bufnr)
   nmap('<leader>r', vim.lsp.buf.rename, '[R]ename')
   nmap('<leader>c', vim.lsp.buf.code_action, '[C]ode Action')
 
-  nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  nmap('gd', function() require('telescope.builtin').lsp_definitions({ show_line = false }) end, '[G]oto [D]efinition')
+  nmap('gr', function() require('telescope.builtin').lsp_references({ show_line = false }) end,
+    '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')

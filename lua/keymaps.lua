@@ -1,3 +1,4 @@
+vim.keymap.set('n', '<leader>d', '"_d', { desc = 'Delete to _ register' })
 vim.keymap.set('n', 'ga', '<C-^>', { desc = 'Go to alternate file' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
@@ -45,14 +46,3 @@ vim.keymap.set("n", "'d", function() harpoon:list():select(3) end, { desc = 'Nav
 vim.keymap.set("n", "'f", function() harpoon:list():select(4) end, { desc = 'Navigate to harpoon file 4' })
 vim.keymap.set("n", "'p", function() harpoon:list():prev() end, { desc = 'Harpoon previous file' })
 vim.keymap.set("n", "'n", function() harpoon:list():next() end, { desc = 'Harpoon next file' })
-
--- TODO plugin keymaps
-local todo = require("todo-comments")
-vim.keymap.set("n", "]t", function()
-  todo.jump_next()
-end, { desc = "Next todo comment" })
-vim.keymap.set("n", "[t", function()
-  todo.jump_prev()
-end, { desc = "Previous todo comment" })
-vim.keymap.set("n", "<leader>sT", "<CMD>TodoTelescope<CR>", { desc = "[S]earch [T]odos" })
-vim.keymap.set("n", "<leader>tq", "<CMD>TodoQuickFix<CR>", { desc = "Send [T]ODO's to [Q]uickfix List" })
