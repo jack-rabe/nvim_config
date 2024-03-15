@@ -1,7 +1,7 @@
 -- [[ setting options]]
 vim.o.hlsearch = true
 vim.wo.number = true
-vim.opt.scrolloff = 3
+vim.opt.scrolloff = 5
 vim.wo.relativenumber = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -24,3 +24,7 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- sets how neovim will display certain whitespace in the editor.
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', nbsp = '␣', eol = '↵' }

@@ -67,7 +67,7 @@ local function get_harpoon_files()
     local filename = path_in_repo:match("[^/]+$")
     local file_is_active = current_file:match(".*" .. path_in_repo) ~= nil
     if file_is_active then
-      table.insert(filenames, "<" .. keys[idx] .. "> " .. filename)
+      table.insert(filenames, "⚓" .. filename)
     else
       table.insert(filenames, "[" .. keys[idx] .. "] " .. filename)
     end
@@ -98,7 +98,7 @@ return {
       globalstatus = true
     },
     sections = {
-      lualine_a = { 'mode' },
+      lualine_a = { { 'mode', fmt = function(str) return str:sub(1, 1) end } },
       lualine_b = { 'branch' },
       lualine_c = { 'filename', 'diagnostics', show_macro_recording, },
       lualine_x = { 'diff', get_lsp },

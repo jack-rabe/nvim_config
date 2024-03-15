@@ -9,7 +9,7 @@ if not vim.loop.fs_stat(lazypath) then
     'clone',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
+    '--branch=stable',
     lazypath,
   }
 end
@@ -22,22 +22,6 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  {
-    "EdenEast/nightfox.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd.colo('carbonfox')
-    end
-  },
-  -- {
-  --   'rebelot/kanagawa.nvim',
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     vim.cmd.colo('kanagawa')
-  --   end
-  -- },
   'mbbill/undotree',
   'tpope/vim-surround',
   'tpope/vim-repeat',
@@ -164,7 +148,6 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 
-
   vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
     buffer = bufnr,
     callback = function()
@@ -252,7 +235,7 @@ mason_lspconfig.setup_handlers {
 
 local function setFlashCursorColor()
   vim.cmd([[highlight clear FlashCursor]])
-  vim.cmd([[highlight FlashCursor guibg=white guifg=black]])
+  vim.cmd([[highlight FlashCursor guibg=black guifg=white]])
 end
 setFlashCursorColor()
 
