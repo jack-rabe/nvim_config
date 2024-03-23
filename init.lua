@@ -22,23 +22,15 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  'mbbill/undotree',
   'tpope/vim-surround',
   'tpope/vim-repeat',
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
   'folke/which-key.nvim',
   {
-    "chrishrb/gx.nvim",
-    keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
-    cmd = { "Browse" },
-    init = function()
-      vim.g.netrw_nogx = 1 -- disable netrw gx
-    end,
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = true, -- default settings
+    "j-hui/fidget.nvim",
+    opts = {},
   },
-
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -196,6 +188,7 @@ local servers = {
   tsserver = {},
   tailwindcss = {},
   html = {},
+  ocamllsp = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
@@ -233,21 +226,18 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
-local function setFlashCursorColor()
-  vim.cmd([[highlight clear FlashCursor]])
-  vim.cmd([[highlight FlashCursor guibg=black guifg=white]])
-end
-setFlashCursorColor()
-
-local switch_flash_highlights = vim.api.nvim_create_augroup('SwitchFlashHighlights', {})
-vim.api.nvim_create_autocmd('ColorScheme', {
-  callback = setFlashCursorColor,
-  group = switch_flash_highlights,
-  pattern = '*',
-})
-
 require('options')
 require('treesitter_setup')
 require('cmp_setup')
 require('keymaps')
 require('telescope_setup')
+
+
+-- ✖»✕
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = "»",
+  },
+})
+-- ocaml stuff
+-- set rtp^="/Users/jrabe/.opam/default/share/ocp-indent/vim"

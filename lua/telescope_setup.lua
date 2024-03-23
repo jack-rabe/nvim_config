@@ -1,5 +1,3 @@
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
 local actions = require('telescope.actions')
 local builtins = require('telescope.builtin')
 local themes = require('telescope.themes')
@@ -7,7 +5,13 @@ local themes = require('telescope.themes')
 require('telescope').setup {
   extensions = {
     ["ui-select"] = {
-      themes.get_dropdown {}
+      themes.get_dropdown {
+        layout_config = {
+          center = {
+            anchor = "N",
+          },
+        }
+      }
     }
   },
   defaults = {
@@ -26,8 +30,9 @@ require('telescope').setup {
     sorting_strategy = 'ascending',
     mappings = {
       i = {
-        ["<C-n>"] = actions.cycle_history_next,
-        ["<C-p>"] = actions.cycle_history_prev,
+        -- TODO - prev/next history mappings
+        ["<C-n>"] = actions.move_selection_next,
+        ["<C-p>"] = actions.move_selection_previous,
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-a>"] = actions.send_to_qflist + actions.open_qflist,
@@ -50,7 +55,7 @@ require('telescope').setup {
     },
     diagnostics = {
       layout_strategy = 'center'
-    }
+    },
   }
 }
 
@@ -124,8 +129,10 @@ nmap('ss', builtins.lsp_document_symbols, 'Document [S]ymbols')
 nmap('sc', builtins.command_history, '[C]ommand History')
 nmap('sy', builtins.lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 nmap('su', builtins.resume, '[S]earch Resume')
+nmap('sn', builtins.resume, '[S]earch Resume')
 nmap('<space>', builtins.current_buffer_fuzzy_find, 'Current buffer fuzzy find')
 nmap('sH', function() builtins.find_files({ hidden = true }) end, 'Search [H]idden Files')
+nmap('sn', function() require('telescope').extensions.notify.notify({}) end, 'Search [N]otify')
 
 nmap('gb', builtins.git_branches, '[G]it [B]ranches')
 nmap('gs', builtins.git_status, '[G]it [S]tatus')

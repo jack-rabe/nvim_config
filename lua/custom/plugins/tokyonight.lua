@@ -21,9 +21,18 @@ return {
                 hl.TelescopeBorder = {
                     bg = c.bg_dark,
                 }
+                hl.MatchParen = {
+                    bold = true,
+                    underline = true,
+                }
+                hl.NormalFloat = {
+                    bg = c.bg_dark,
+                }
+                hl.FloatBorder = {
+                    bg = c.bg_dark,
+                }
             end,
-
         })
-        vim.cmd.colorscheme 'tokyonight'
+        vim.cmd.colorscheme 'tokyonight-night'
     end,
 }

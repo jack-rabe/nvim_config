@@ -1,5 +1,7 @@
 return {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
-    opts = {}
+    opts = {
+        ignored_next_char = "[^\\n]"
+    }
 }

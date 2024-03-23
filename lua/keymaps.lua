@@ -27,12 +27,12 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 
 -- Noice keymaps
-vim.keymap.set("n", "<leader>nh", function()
-  require("noice").cmd("history")
-end, { desc = "[N]oice [H]istory" })
 vim.keymap.set("n", "<leader>nl", function()
   require("noice").cmd("last")
 end, { desc = "[N]oice [L]ast" })
+vim.keymap.set("n", "<leader>nd", function()
+  require("noice").cmd("dismiss")
+end, { desc = "[N]oice [D]ismiss" })
 
 -- Harpoon keymaps
 local harpoon = require("harpoon")

@@ -13,16 +13,16 @@ cmp.setup {
   -- experimental = {
   -- ghost_text = true
   -- },
-  ---@diagnostic disable-next-line: missing-fields
-  performance = {
-    max_view_entries = 10,
-  },
-  ---@diagnostic disable-next-line: missing-fields
-  formatting = {
-    format = function(entry, vim_item)
-      return vim_item
-    end
-  },
+  -- ---@diagnostic disable-next-line: missing-fields
+  -- performance = {
+  --   max_view_entries = 10,
+  -- },
+  -- ---@diagnostic disable-next-line: missing-fields
+  -- formatting = {
+  --   format = function(entry, vim_item)
+  --     return vim_item
+  --   end
+  -- },
   -- view = {
   --   entries = "native"
   -- },
