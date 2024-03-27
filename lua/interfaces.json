@@ -1,0 +1,1804 @@
+[
+  {
+    "name": "FileLike",
+    "package": "main",
+    "bases": [],
+    "methods": [
+      "Name() string",
+      "Stat() (fs.FileInfo, error)",
+      "Read([]byte) (int, error)",
+      "Close() error"
+    ],
+    "filename": "cmd/pack/pack.go"
+  },
+  {
+    "name": "Ordered",
+    "package": "cmp",
+    "bases": [],
+    "methods": [],
+    "filename": "cmp/cmp.go"
+  },
+  {
+    "name": "Resetter",
+    "package": "flate",
+    "bases": [],
+    "methods": [
+      "Reset(r io.Reader, dict []byte) error"
+    ],
+    "filename": "compress/flate/inflate.go"
+  },
+  {
+    "name": "Reader",
+    "package": "flate",
+    "bases": [
+      "io.Reader",
+      "io.ByteReader"
+    ],
+    "methods": [],
+    "filename": "compress/flate/inflate.go"
+  },
+  {
+    "name": "Resetter",
+    "package": "zlib",
+    "bases": [],
+    "methods": [
+      "Reset(r io.Reader, dict []byte) error"
+    ],
+    "filename": "compress/zlib/reader.go"
+  },
+  {
+    "name": "Interface",
+    "package": "heap",
+    "bases": [
+      "sort.Interface"
+    ],
+    "methods": [
+      "Push(x any)",
+      "Pop() any"
+    ],
+    "filename": "container/heap/heap.go"
+  },
+  {
+    "name": "Context",
+    "package": "context",
+    "bases": [],
+    "methods": [
+      "Deadline() (deadline time.Time, ok bool)",
+      "Done() \u003c-chan struct{}",
+      "Err() error",
+      "Value(key any) any"
+    ],
+    "filename": "context/context.go"
+  },
+  {
+    "name": "Block",
+    "package": "cipher",
+    "bases": [],
+    "methods": [
+      "BlockSize() int",
+      "Encrypt(dst, src []byte)",
+      "Decrypt(dst, src []byte)"
+    ],
+    "filename": "crypto/cipher/cipher.go"
+  },
+  {
+    "name": "Stream",
+    "package": "cipher",
+    "bases": [],
+    "methods": [
+      "XORKeyStream(dst, src []byte)"
+    ],
+    "filename": "crypto/cipher/cipher.go"
+  },
+  {
+    "name": "BlockMode",
+    "package": "cipher",
+    "bases": [],
+    "methods": [
+      "BlockSize() int",
+      "CryptBlocks(dst, src []byte)"
+    ],
+    "filename": "crypto/cipher/cipher.go"
+  },
+  {
+    "name": "AEAD",
+    "package": "cipher",
+    "bases": [],
+    "methods": [
+      "NonceSize() int",
+      "Overhead() int",
+      "Seal(dst, nonce, plaintext, additionalData []byte) []byte",
+      "Open(dst, nonce, ciphertext, additionalData []byte) ([]byte, error)"
+    ],
+    "filename": "crypto/cipher/gcm.go"
+  },
+  {
+    "name": "Signer",
+    "package": "crypto",
+    "bases": [],
+    "methods": [
+      "Public() PublicKey",
+      "Sign(rand io.Reader, digest []byte, opts SignerOpts) (signature []byte, err error)"
+    ],
+    "filename": "crypto/crypto.go"
+  },
+  {
+    "name": "SignerOpts",
+    "package": "crypto",
+    "bases": [],
+    "methods": [
+      "HashFunc() Hash"
+    ],
+    "filename": "crypto/crypto.go"
+  },
+  {
+    "name": "Decrypter",
+    "package": "crypto",
+    "bases": [],
+    "methods": [
+      "Public() PublicKey",
+      "Decrypt(rand io.Reader, msg []byte, opts DecrypterOpts) (plaintext []byte, err error)"
+    ],
+    "filename": "crypto/crypto.go"
+  },
+  {
+    "name": "Curve",
+    "package": "ecdh",
+    "bases": [],
+    "methods": [
+      "GenerateKey(rand io.Reader) (*PrivateKey, error)",
+      "NewPrivateKey(key []byte) (*PrivateKey, error)",
+      "NewPublicKey(key []byte) (*PublicKey, error)"
+    ],
+    "filename": "crypto/ecdh/ecdh.go"
+  },
+  {
+    "name": "Curve",
+    "package": "elliptic",
+    "bases": [],
+    "methods": [
+      "Params() *CurveParams",
+      "IsOnCurve(x, y *big.Int) bool",
+      "Add(x1, y1, x2, y2 *big.Int) (x, y *big.Int)",
+      "Double(x1, y1 *big.Int) (x, y *big.Int)",
+      "ScalarMult(x1, y1 *big.Int, k []byte) (x, y *big.Int)",
+      "ScalarBaseMult(k []byte) (x, y *big.Int)"
+    ],
+    "filename": "crypto/elliptic/elliptic.go"
+  },
+  {
+    "name": "ClientSessionCache",
+    "package": "tls",
+    "bases": [],
+    "methods": [
+      "Get(sessionKey string) (session *ClientSessionState, ok bool)",
+      "Put(sessionKey string, cs *ClientSessionState)"
+    ],
+    "filename": "crypto/tls/common.go"
+  },
+  {
+    "name": "Driver",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "Open(name string) (Conn, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "DriverContext",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "OpenConnector(name string) (Connector, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "Connector",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "Connect(context.Context) (Conn, error)",
+      "Driver() Driver"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "Pinger",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "Ping(ctx context.Context) error"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "Execer",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "Exec(query string, args []Value) (Result, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "ExecerContext",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "ExecContext(ctx context.Context, query string, args []NamedValue) (Result, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "Queryer",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "Query(query string, args []Value) (Rows, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "QueryerContext",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "QueryContext(ctx context.Context, query string, args []NamedValue) (Rows, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "Conn",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "Prepare(query string) (Stmt, error)",
+      "Close() error",
+      "Begin() (Tx, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "ConnPrepareContext",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "PrepareContext(ctx context.Context, query string) (Stmt, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "ConnBeginTx",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "BeginTx(ctx context.Context, opts TxOptions) (Tx, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "SessionResetter",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "ResetSession(ctx context.Context) error"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "Validator",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "IsValid() bool"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "Result",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "LastInsertId() (int64, error)",
+      "RowsAffected() (int64, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "Stmt",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "Close() error",
+      "NumInput() int",
+      "Exec(args []Value) (Result, error)",
+      "Query(args []Value) (Rows, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "StmtExecContext",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "ExecContext(ctx context.Context, args []NamedValue) (Result, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "StmtQueryContext",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "QueryContext(ctx context.Context, args []NamedValue) (Rows, error)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "NamedValueChecker",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "CheckNamedValue(*NamedValue) error"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "ColumnConverter",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "ColumnConverter(idx int) ValueConverter"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "Rows",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "Columns() []string",
+      "Close() error",
+      "Next(dest []Value) error"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "RowsNextResultSet",
+    "package": "driver",
+    "bases": [
+      "Rows"
+    ],
+    "methods": [
+      "HasNextResultSet() bool",
+      "NextResultSet() error"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "RowsColumnTypeScanType",
+    "package": "driver",
+    "bases": [
+      "Rows"
+    ],
+    "methods": [
+      "ColumnTypeScanType(index int) reflect.Type"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "RowsColumnTypeDatabaseTypeName",
+    "package": "driver",
+    "bases": [
+      "Rows"
+    ],
+    "methods": [
+      "ColumnTypeDatabaseTypeName(index int) string"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "RowsColumnTypeLength",
+    "package": "driver",
+    "bases": [
+      "Rows"
+    ],
+    "methods": [
+      "ColumnTypeLength(index int) (length int64, ok bool)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "RowsColumnTypeNullable",
+    "package": "driver",
+    "bases": [
+      "Rows"
+    ],
+    "methods": [
+      "ColumnTypeNullable(index int) (nullable, ok bool)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "RowsColumnTypePrecisionScale",
+    "package": "driver",
+    "bases": [
+      "Rows"
+    ],
+    "methods": [
+      "ColumnTypePrecisionScale(index int) (precision, scale int64, ok bool)"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "Tx",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "Commit() error",
+      "Rollback() error"
+    ],
+    "filename": "database/sql/driver/driver.go"
+  },
+  {
+    "name": "ValueConverter",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "ConvertValue(v any) (Value, error)"
+    ],
+    "filename": "database/sql/driver/types.go"
+  },
+  {
+    "name": "Valuer",
+    "package": "driver",
+    "bases": [],
+    "methods": [
+      "Value() (Value, error)"
+    ],
+    "filename": "database/sql/driver/types.go"
+  },
+  {
+    "name": "Scanner",
+    "package": "sql",
+    "bases": [],
+    "methods": [
+      "Scan(src any) error"
+    ],
+    "filename": "database/sql/sql.go"
+  },
+  {
+    "name": "Result",
+    "package": "sql",
+    "bases": [],
+    "methods": [
+      "LastInsertId() (int64, error)",
+      "RowsAffected() (int64, error)"
+    ],
+    "filename": "database/sql/sql.go"
+  },
+  {
+    "name": "Type",
+    "package": "dwarf",
+    "bases": [],
+    "methods": [
+      "Common() *CommonType",
+      "String() string",
+      "Size() int64"
+    ],
+    "filename": "debug/dwarf/type.go"
+  },
+  {
+    "name": "Load",
+    "package": "macho",
+    "bases": [],
+    "methods": [
+      "Raw() []byte"
+    ],
+    "filename": "debug/macho/file.go"
+  },
+  {
+    "name": "ByteOrder",
+    "package": "binary",
+    "bases": [],
+    "methods": [
+      "Uint16([]byte) uint16",
+      "Uint32([]byte) uint32",
+      "Uint64([]byte) uint64",
+      "PutUint16([]byte, uint16)",
+      "PutUint32([]byte, uint32)",
+      "PutUint64([]byte, uint64)",
+      "String() string"
+    ],
+    "filename": "encoding/binary/binary.go"
+  },
+  {
+    "name": "AppendByteOrder",
+    "package": "binary",
+    "bases": [],
+    "methods": [
+      "AppendUint16([]byte, uint16) []byte",
+      "AppendUint32([]byte, uint32) []byte",
+      "AppendUint64([]byte, uint64) []byte",
+      "String() string"
+    ],
+    "filename": "encoding/binary/binary.go"
+  },
+  {
+    "name": "BinaryMarshaler",
+    "package": "encoding",
+    "bases": [],
+    "methods": [
+      "MarshalBinary() (data []byte, err error)"
+    ],
+    "filename": "encoding/encoding.go"
+  },
+  {
+    "name": "BinaryUnmarshaler",
+    "package": "encoding",
+    "bases": [],
+    "methods": [
+      "UnmarshalBinary(data []byte) error"
+    ],
+    "filename": "encoding/encoding.go"
+  },
+  {
+    "name": "TextMarshaler",
+    "package": "encoding",
+    "bases": [],
+    "methods": [
+      "MarshalText() (text []byte, err error)"
+    ],
+    "filename": "encoding/encoding.go"
+  },
+  {
+    "name": "TextUnmarshaler",
+    "package": "encoding",
+    "bases": [],
+    "methods": [
+      "UnmarshalText(text []byte) error"
+    ],
+    "filename": "encoding/encoding.go"
+  },
+  {
+    "name": "GobEncoder",
+    "package": "gob",
+    "bases": [],
+    "methods": [
+      "GobEncode() ([]byte, error)"
+    ],
+    "filename": "encoding/gob/type.go"
+  },
+  {
+    "name": "GobDecoder",
+    "package": "gob",
+    "bases": [],
+    "methods": [
+      "GobDecode([]byte) error"
+    ],
+    "filename": "encoding/gob/type.go"
+  },
+  {
+    "name": "Unmarshaler",
+    "package": "json",
+    "bases": [],
+    "methods": [
+      "UnmarshalJSON([]byte) error"
+    ],
+    "filename": "encoding/json/decode.go"
+  },
+  {
+    "name": "Marshaler",
+    "package": "json",
+    "bases": [],
+    "methods": [
+      "MarshalJSON() ([]byte, error)"
+    ],
+    "filename": "encoding/json/encode.go"
+  },
+  {
+    "name": "Marshaler",
+    "package": "xml",
+    "bases": [],
+    "methods": [
+      "MarshalXML(e *Encoder, start StartElement) error"
+    ],
+    "filename": "encoding/xml/marshal.go"
+  },
+  {
+    "name": "MarshalerAttr",
+    "package": "xml",
+    "bases": [],
+    "methods": [
+      "MarshalXMLAttr(name Name) (Attr, error)"
+    ],
+    "filename": "encoding/xml/marshal.go"
+  },
+  {
+    "name": "Unmarshaler",
+    "package": "xml",
+    "bases": [],
+    "methods": [
+      "UnmarshalXML(d *Decoder, start StartElement) error"
+    ],
+    "filename": "encoding/xml/read.go"
+  },
+  {
+    "name": "UnmarshalerAttr",
+    "package": "xml",
+    "bases": [],
+    "methods": [
+      "UnmarshalXMLAttr(attr Attr) error"
+    ],
+    "filename": "encoding/xml/read.go"
+  },
+  {
+    "name": "TokenReader",
+    "package": "xml",
+    "bases": [],
+    "methods": [
+      "Token() (Token, error)"
+    ],
+    "filename": "encoding/xml/xml.go"
+  },
+  {
+    "name": "Var",
+    "package": "expvar",
+    "bases": [],
+    "methods": [
+      "String() string"
+    ],
+    "filename": "expvar/expvar.go"
+  },
+  {
+    "name": "Value",
+    "package": "flag",
+    "bases": [],
+    "methods": [
+      "String() string",
+      "Set(string) error"
+    ],
+    "filename": "flag/flag.go"
+  },
+  {
+    "name": "Getter",
+    "package": "flag",
+    "bases": [
+      "Value"
+    ],
+    "methods": [
+      "Get() any"
+    ],
+    "filename": "flag/flag.go"
+  },
+  {
+    "name": "State",
+    "package": "fmt",
+    "bases": [],
+    "methods": [
+      "Write(b []byte) (n int, err error)",
+      "Width() (wid int, ok bool)",
+      "Precision() (prec int, ok bool)",
+      "Flag(c int) bool"
+    ],
+    "filename": "fmt/print.go"
+  },
+  {
+    "name": "Formatter",
+    "package": "fmt",
+    "bases": [],
+    "methods": [
+      "Format(f State, verb rune)"
+    ],
+    "filename": "fmt/print.go"
+  },
+  {
+    "name": "Stringer",
+    "package": "fmt",
+    "bases": [],
+    "methods": [
+      "String() string"
+    ],
+    "filename": "fmt/print.go"
+  },
+  {
+    "name": "GoStringer",
+    "package": "fmt",
+    "bases": [],
+    "methods": [
+      "GoString() string"
+    ],
+    "filename": "fmt/print.go"
+  },
+  {
+    "name": "ScanState",
+    "package": "fmt",
+    "bases": [],
+    "methods": [
+      "ReadRune() (r rune, size int, err error)",
+      "UnreadRune() error",
+      "SkipSpace()",
+      "Token(skipSpace bool, f func(rune) bool) (token []byte, err error)",
+      "Width() (wid int, ok bool)",
+      "Read(buf []byte) (n int, err error)"
+    ],
+    "filename": "fmt/scan.go"
+  },
+  {
+    "name": "Scanner",
+    "package": "fmt",
+    "bases": [],
+    "methods": [
+      "Scan(state ScanState, verb rune) error"
+    ],
+    "filename": "fmt/scan.go"
+  },
+  {
+    "name": "Node",
+    "package": "ast",
+    "bases": [],
+    "methods": [
+      "Pos() token.Pos",
+      "End() token.Pos"
+    ],
+    "filename": "go/ast/ast.go"
+  },
+  {
+    "name": "Expr",
+    "package": "ast",
+    "bases": [
+      "Node"
+    ],
+    "methods": [],
+    "filename": "go/ast/ast.go"
+  },
+  {
+    "name": "Stmt",
+    "package": "ast",
+    "bases": [
+      "Node"
+    ],
+    "methods": [],
+    "filename": "go/ast/ast.go"
+  },
+  {
+    "name": "Decl",
+    "package": "ast",
+    "bases": [
+      "Node"
+    ],
+    "methods": [],
+    "filename": "go/ast/ast.go"
+  },
+  {
+    "name": "Visitor",
+    "package": "ast",
+    "bases": [],
+    "methods": [
+      "Visit(node Node) (w Visitor)"
+    ],
+    "filename": "go/ast/walk.go"
+  },
+  {
+    "name": "Expr",
+    "package": "constraint",
+    "bases": [],
+    "methods": [
+      "String() string",
+      "Eval(ok func(tag string) bool) bool"
+    ],
+    "filename": "go/build/constraint/expr.go"
+  },
+  {
+    "name": "Value",
+    "package": "constant",
+    "bases": [],
+    "methods": [
+      "Kind() Kind",
+      "String() string",
+      "ExactString() string"
+    ],
+    "filename": "go/constant/value.go"
+  },
+  {
+    "name": "Block",
+    "package": "comment",
+    "bases": [],
+    "methods": [],
+    "filename": "go/doc/comment/parse.go"
+  },
+  {
+    "name": "Text",
+    "package": "comment",
+    "bases": [],
+    "methods": [],
+    "filename": "go/doc/comment/parse.go"
+  },
+  {
+    "name": "Importer",
+    "package": "types",
+    "bases": [],
+    "methods": [
+      "Import(path string) (*Package, error)"
+    ],
+    "filename": "go/types/api.go"
+  },
+  {
+    "name": "ImporterFrom",
+    "package": "types",
+    "bases": [
+      "Importer"
+    ],
+    "methods": [
+      "ImportFrom(path, dir string, mode ImportMode) (*Package, error)"
+    ],
+    "filename": "go/types/api.go"
+  },
+  {
+    "name": "Object",
+    "package": "types",
+    "bases": [],
+    "methods": [
+      "Parent() *Scope",
+      "Pos() token.Pos",
+      "Pkg() *Package",
+      "Name() string",
+      "Type() Type",
+      "Exported() bool",
+      "Id() string",
+      "String() string"
+    ],
+    "filename": "go/types/object.go"
+  },
+  {
+    "name": "Sizes",
+    "package": "types",
+    "bases": [],
+    "methods": [
+      "Alignof(T Type) int64",
+      "Offsetsof(fields []*Var) []int64",
+      "Sizeof(T Type) int64"
+    ],
+    "filename": "go/types/sizes.go"
+  },
+  {
+    "name": "Type",
+    "package": "types",
+    "bases": [],
+    "methods": [
+      "Underlying() Type",
+      "String() string"
+    ],
+    "filename": "go/types/type.go"
+  },
+  {
+    "name": "Hash",
+    "package": "hash",
+    "bases": [
+      "io.Writer"
+    ],
+    "methods": [
+      "Sum(b []byte) []byte",
+      "Reset()",
+      "Size() int",
+      "BlockSize() int"
+    ],
+    "filename": "hash/hash.go"
+  },
+  {
+    "name": "Hash32",
+    "package": "hash",
+    "bases": [
+      "Hash"
+    ],
+    "methods": [
+      "Sum32() uint32"
+    ],
+    "filename": "hash/hash.go"
+  },
+  {
+    "name": "Hash64",
+    "package": "hash",
+    "bases": [
+      "Hash"
+    ],
+    "methods": [
+      "Sum64() uint64"
+    ],
+    "filename": "hash/hash.go"
+  },
+  {
+    "name": "Color",
+    "package": "color",
+    "bases": [],
+    "methods": [
+      "RGBA() (r, g, b, a uint32)"
+    ],
+    "filename": "image/color/color.go"
+  },
+  {
+    "name": "Model",
+    "package": "color",
+    "bases": [],
+    "methods": [
+      "Convert(c Color) Color"
+    ],
+    "filename": "image/color/color.go"
+  },
+  {
+    "name": "Image",
+    "package": "draw",
+    "bases": [
+      "image.Image"
+    ],
+    "methods": [
+      "Set(x, y int, c color.Color)"
+    ],
+    "filename": "image/draw/draw.go"
+  },
+  {
+    "name": "RGBA64Image",
+    "package": "draw",
+    "bases": [
+      "image.RGBA64Image"
+    ],
+    "methods": [
+      "Set(x, y int, c color.Color)",
+      "SetRGBA64(x, y int, c color.RGBA64)"
+    ],
+    "filename": "image/draw/draw.go"
+  },
+  {
+    "name": "Quantizer",
+    "package": "draw",
+    "bases": [],
+    "methods": [
+      "Quantize(p color.Palette, m image.Image) color.Palette"
+    ],
+    "filename": "image/draw/draw.go"
+  },
+  {
+    "name": "Drawer",
+    "package": "draw",
+    "bases": [],
+    "methods": [
+      "Draw(dst Image, r image.Rectangle, src image.Image, sp image.Point)"
+    ],
+    "filename": "image/draw/draw.go"
+  },
+  {
+    "name": "Image",
+    "package": "image",
+    "bases": [],
+    "methods": [
+      "ColorModel() color.Model",
+      "Bounds() Rectangle",
+      "At(x, y int) color.Color"
+    ],
+    "filename": "image/image.go"
+  },
+  {
+    "name": "RGBA64Image",
+    "package": "image",
+    "bases": [
+      "Image"
+    ],
+    "methods": [
+      "RGBA64At(x, y int) color.RGBA64"
+    ],
+    "filename": "image/image.go"
+  },
+  {
+    "name": "PalettedImage",
+    "package": "image",
+    "bases": [
+      "Image"
+    ],
+    "methods": [
+      "ColorIndexAt(x, y int) uint8"
+    ],
+    "filename": "image/image.go"
+  },
+  {
+    "name": "Reader",
+    "package": "jpeg",
+    "bases": [
+      "io.ByteReader",
+      "io.Reader"
+    ],
+    "methods": [],
+    "filename": "image/jpeg/reader.go"
+  },
+  {
+    "name": "EncoderBufferPool",
+    "package": "png",
+    "bases": [],
+    "methods": [
+      "Get() *EncoderBuffer",
+      "Put(*EncoderBuffer)"
+    ],
+    "filename": "image/png/writer.go"
+  },
+  {
+    "name": "FS",
+    "package": "fs",
+    "bases": [],
+    "methods": [
+      "Open(name string) (File, error)"
+    ],
+    "filename": "io/fs/fs.go"
+  },
+  {
+    "name": "File",
+    "package": "fs",
+    "bases": [],
+    "methods": [
+      "Stat() (FileInfo, error)",
+      "Read([]byte) (int, error)",
+      "Close() error"
+    ],
+    "filename": "io/fs/fs.go"
+  },
+  {
+    "name": "DirEntry",
+    "package": "fs",
+    "bases": [],
+    "methods": [
+      "Name() string",
+      "IsDir() bool",
+      "Type() FileMode",
+      "Info() (FileInfo, error)"
+    ],
+    "filename": "io/fs/fs.go"
+  },
+  {
+    "name": "ReadDirFile",
+    "package": "fs",
+    "bases": [
+      "File"
+    ],
+    "methods": [
+      "ReadDir(n int) ([]DirEntry, error)"
+    ],
+    "filename": "io/fs/fs.go"
+  },
+  {
+    "name": "FileInfo",
+    "package": "fs",
+    "bases": [],
+    "methods": [
+      "Name() string",
+      "Size() int64",
+      "Mode() FileMode",
+      "ModTime() time.Time",
+      "IsDir() bool",
+      "Sys() any"
+    ],
+    "filename": "io/fs/fs.go"
+  },
+  {
+    "name": "GlobFS",
+    "package": "fs",
+    "bases": [
+      "FS"
+    ],
+    "methods": [
+      "Glob(pattern string) ([]string, error)"
+    ],
+    "filename": "io/fs/glob.go"
+  },
+  {
+    "name": "ReadDirFS",
+    "package": "fs",
+    "bases": [
+      "FS"
+    ],
+    "methods": [
+      "ReadDir(name string) ([]DirEntry, error)"
+    ],
+    "filename": "io/fs/readdir.go"
+  },
+  {
+    "name": "ReadFileFS",
+    "package": "fs",
+    "bases": [
+      "FS"
+    ],
+    "methods": [
+      "ReadFile(name string) ([]byte, error)"
+    ],
+    "filename": "io/fs/readfile.go"
+  },
+  {
+    "name": "StatFS",
+    "package": "fs",
+    "bases": [
+      "FS"
+    ],
+    "methods": [
+      "Stat(name string) (FileInfo, error)"
+    ],
+    "filename": "io/fs/stat.go"
+  },
+  {
+    "name": "SubFS",
+    "package": "fs",
+    "bases": [
+      "FS"
+    ],
+    "methods": [
+      "Sub(dir string) (FS, error)"
+    ],
+    "filename": "io/fs/sub.go"
+  },
+  {
+    "name": "Reader",
+    "package": "io",
+    "bases": [],
+    "methods": [
+      "Read(p []byte) (n int, err error)"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "Writer",
+    "package": "io",
+    "bases": [],
+    "methods": [
+      "Write(p []byte) (n int, err error)"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "Closer",
+    "package": "io",
+    "bases": [],
+    "methods": [
+      "Close() error"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "Seeker",
+    "package": "io",
+    "bases": [],
+    "methods": [
+      "Seek(offset int64, whence int) (int64, error)"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "ReadWriter",
+    "package": "io",
+    "bases": [
+      "Reader",
+      "Writer"
+    ],
+    "methods": [],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "ReadCloser",
+    "package": "io",
+    "bases": [
+      "Reader",
+      "Closer"
+    ],
+    "methods": [],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "WriteCloser",
+    "package": "io",
+    "bases": [
+      "Writer",
+      "Closer"
+    ],
+    "methods": [],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "ReadWriteCloser",
+    "package": "io",
+    "bases": [
+      "Reader",
+      "Writer",
+      "Closer"
+    ],
+    "methods": [],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "ReadSeeker",
+    "package": "io",
+    "bases": [
+      "Reader",
+      "Seeker"
+    ],
+    "methods": [],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "ReadSeekCloser",
+    "package": "io",
+    "bases": [
+      "Reader",
+      "Seeker",
+      "Closer"
+    ],
+    "methods": [],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "WriteSeeker",
+    "package": "io",
+    "bases": [
+      "Writer",
+      "Seeker"
+    ],
+    "methods": [],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "ReadWriteSeeker",
+    "package": "io",
+    "bases": [
+      "Reader",
+      "Writer",
+      "Seeker"
+    ],
+    "methods": [],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "ReaderFrom",
+    "package": "io",
+    "bases": [],
+    "methods": [
+      "ReadFrom(r Reader) (n int64, err error)"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "WriterTo",
+    "package": "io",
+    "bases": [],
+    "methods": [
+      "WriteTo(w Writer) (n int64, err error)"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "ReaderAt",
+    "package": "io",
+    "bases": [],
+    "methods": [
+      "ReadAt(p []byte, off int64) (n int, err error)"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "WriterAt",
+    "package": "io",
+    "bases": [],
+    "methods": [
+      "WriteAt(p []byte, off int64) (n int, err error)"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "ByteReader",
+    "package": "io",
+    "bases": [],
+    "methods": [
+      "ReadByte() (byte, error)"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "ByteScanner",
+    "package": "io",
+    "bases": [
+      "ByteReader"
+    ],
+    "methods": [
+      "UnreadByte() error"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "ByteWriter",
+    "package": "io",
+    "bases": [],
+    "methods": [
+      "WriteByte(c byte) error"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "RuneReader",
+    "package": "io",
+    "bases": [],
+    "methods": [
+      "ReadRune() (r rune, size int, err error)"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "RuneScanner",
+    "package": "io",
+    "bases": [
+      "RuneReader"
+    ],
+    "methods": [
+      "UnreadRune() error"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "StringWriter",
+    "package": "io",
+    "bases": [],
+    "methods": [
+      "WriteString(s string) (n int, err error)"
+    ],
+    "filename": "io/io.go"
+  },
+  {
+    "name": "Handler",
+    "package": "slog",
+    "bases": [],
+    "methods": [
+      "Enabled(context.Context, Level) bool",
+      "Handle(context.Context, Record) error",
+      "WithAttrs(attrs []Attr) Handler",
+      "WithGroup(name string) Handler"
+    ],
+    "filename": "log/slog/handler.go"
+  },
+  {
+    "name": "Leveler",
+    "package": "slog",
+    "bases": [],
+    "methods": [
+      "Level() Level"
+    ],
+    "filename": "log/slog/level.go"
+  },
+  {
+    "name": "LogValuer",
+    "package": "slog",
+    "bases": [],
+    "methods": [
+      "LogValue() Value"
+    ],
+    "filename": "log/slog/value.go"
+  },
+  {
+    "name": "Source",
+    "package": "rand",
+    "bases": [],
+    "methods": [
+      "Int63() int64",
+      "Seed(seed int64)"
+    ],
+    "filename": "math/rand/rand.go"
+  },
+  {
+    "name": "Source64",
+    "package": "rand",
+    "bases": [
+      "Source"
+    ],
+    "methods": [
+      "Uint64() uint64"
+    ],
+    "filename": "math/rand/rand.go"
+  },
+  {
+    "name": "Source",
+    "package": "rand",
+    "bases": [],
+    "methods": [
+      "Uint64() uint64"
+    ],
+    "filename": "math/rand/v2/rand.go"
+  },
+  {
+    "name": "File",
+    "package": "multipart",
+    "bases": [
+      "io.Reader",
+      "io.ReaderAt",
+      "io.Seeker",
+      "io.Closer"
+    ],
+    "methods": [],
+    "filename": "mime/multipart/formdata.go"
+  },
+  {
+    "name": "RoundTripper",
+    "package": "http",
+    "bases": [],
+    "methods": [
+      "RoundTrip(*Request) (*Response, error)"
+    ],
+    "filename": "net/http/client.go"
+  },
+  {
+    "name": "PublicSuffixList",
+    "package": "cookiejar",
+    "bases": [],
+    "methods": [
+      "PublicSuffix(domain string) string",
+      "String() string"
+    ],
+    "filename": "net/http/cookiejar/jar.go"
+  },
+  {
+    "name": "FileSystem",
+    "package": "http",
+    "bases": [],
+    "methods": [
+      "Open(name string) (File, error)"
+    ],
+    "filename": "net/http/fs.go"
+  },
+  {
+    "name": "File",
+    "package": "http",
+    "bases": [
+      "io.Closer",
+      "io.Reader",
+      "io.Seeker"
+    ],
+    "methods": [
+      "Readdir(count int) ([]fs.FileInfo, error)",
+      "Stat() (fs.FileInfo, error)"
+    ],
+    "filename": "net/http/fs.go"
+  },
+  {
+    "name": "Pusher",
+    "package": "http",
+    "bases": [],
+    "methods": [
+      "Push(target string, opts *PushOptions) error"
+    ],
+    "filename": "net/http/http.go"
+  },
+  {
+    "name": "BufferPool",
+    "package": "httputil",
+    "bases": [],
+    "methods": [
+      "Get() []byte",
+      "Put([]byte)"
+    ],
+    "filename": "net/http/httputil/reverseproxy.go"
+  },
+  {
+    "name": "CookieJar",
+    "package": "http",
+    "bases": [],
+    "methods": [
+      "SetCookies(u *url.URL, cookies []*Cookie)",
+      "Cookies(u *url.URL) []*Cookie"
+    ],
+    "filename": "net/http/jar.go"
+  },
+  {
+    "name": "Handler",
+    "package": "http",
+    "bases": [],
+    "methods": [
+      "ServeHTTP(ResponseWriter, *Request)"
+    ],
+    "filename": "net/http/server.go"
+  },
+  {
+    "name": "ResponseWriter",
+    "package": "http",
+    "bases": [],
+    "methods": [
+      "Header() Header",
+      "Write([]byte) (int, error)",
+      "WriteHeader(statusCode int)"
+    ],
+    "filename": "net/http/server.go"
+  },
+  {
+    "name": "Flusher",
+    "package": "http",
+    "bases": [],
+    "methods": [
+      "Flush()"
+    ],
+    "filename": "net/http/server.go"
+  },
+  {
+    "name": "Hijacker",
+    "package": "http",
+    "bases": [],
+    "methods": [
+      "Hijack() (net.Conn, *bufio.ReadWriter, error)"
+    ],
+    "filename": "net/http/server.go"
+  },
+  {
+    "name": "CloseNotifier",
+    "package": "http",
+    "bases": [],
+    "methods": [
+      "CloseNotify() \u003c-chan bool"
+    ],
+    "filename": "net/http/server.go"
+  },
+  {
+    "name": "Addr",
+    "package": "net",
+    "bases": [],
+    "methods": [
+      "Network() string",
+      "String() string"
+    ],
+    "filename": "net/net.go"
+  },
+  {
+    "name": "Conn",
+    "package": "net",
+    "bases": [],
+    "methods": [
+      "Read(b []byte) (n int, err error)",
+      "Write(b []byte) (n int, err error)",
+      "Close() error",
+      "LocalAddr() Addr",
+      "RemoteAddr() Addr",
+      "SetDeadline(t time.Time) error",
+      "SetReadDeadline(t time.Time) error",
+      "SetWriteDeadline(t time.Time) error"
+    ],
+    "filename": "net/net.go"
+  },
+  {
+    "name": "PacketConn",
+    "package": "net",
+    "bases": [],
+    "methods": [
+      "ReadFrom(p []byte) (n int, addr Addr, err error)",
+      "WriteTo(p []byte, addr Addr) (n int, err error)",
+      "Close() error",
+      "LocalAddr() Addr",
+      "SetDeadline(t time.Time) error",
+      "SetReadDeadline(t time.Time) error",
+      "SetWriteDeadline(t time.Time) error"
+    ],
+    "filename": "net/net.go"
+  },
+  {
+    "name": "Listener",
+    "package": "net",
+    "bases": [],
+    "methods": [
+      "Accept() (Conn, error)",
+      "Close() error",
+      "Addr() Addr"
+    ],
+    "filename": "net/net.go"
+  },
+  {
+    "name": "Error",
+    "package": "net",
+    "bases": [
+      "error"
+    ],
+    "methods": [
+      "Timeout() bool",
+      "Temporary() bool"
+    ],
+    "filename": "net/net.go"
+  },
+  {
+    "name": "ClientCodec",
+    "package": "rpc",
+    "bases": [],
+    "methods": [
+      "WriteRequest(*Request, any) error",
+      "ReadResponseHeader(*Response) error",
+      "ReadResponseBody(any) error",
+      "Close() error"
+    ],
+    "filename": "net/rpc/client.go"
+  },
+  {
+    "name": "ServerCodec",
+    "package": "rpc",
+    "bases": [],
+    "methods": [
+      "ReadRequestHeader(*Request) error",
+      "ReadRequestBody(any) error",
+      "WriteResponse(*Response, any) error",
+      "Close() error"
+    ],
+    "filename": "net/rpc/server.go"
+  },
+  {
+    "name": "Auth",
+    "package": "smtp",
+    "bases": [],
+    "methods": [
+      "Start(server *ServerInfo) (proto string, toServer []byte, err error)",
+      "Next(fromServer []byte, more bool) (toServer []byte, err error)"
+    ],
+    "filename": "net/smtp/auth.go"
+  },
+  {
+    "name": "Signal",
+    "package": "os",
+    "bases": [],
+    "methods": [
+      "String() string",
+      "Signal()"
+    ],
+    "filename": "os/exec.go"
+  },
+  {
+    "name": "Type",
+    "package": "reflect",
+    "bases": [],
+    "methods": [
+      "Align() int",
+      "FieldAlign() int",
+      "Method(int) Method",
+      "MethodByName(string) (Method, bool)",
+      "NumMethod() int",
+      "Name() string",
+      "PkgPath() string",
+      "Size() uintptr",
+      "String() string",
+      "Kind() Kind",
+      "Implements(u Type) bool",
+      "AssignableTo(u Type) bool",
+      "ConvertibleTo(u Type) bool",
+      "Comparable() bool",
+      "Bits() int",
+      "ChanDir() ChanDir",
+      "IsVariadic() bool",
+      "Elem() Type",
+      "Field(i int) StructField",
+      "FieldByIndex(index []int) StructField",
+      "FieldByName(name string) (StructField, bool)",
+      "FieldByNameFunc(match func(string) bool) (StructField, bool)",
+      "In(i int) Type",
+      "Key() Type",
+      "Len() int",
+      "NumField() int",
+      "NumIn() int",
+      "NumOut() int",
+      "Out(i int) Type"
+    ],
+    "filename": "reflect/type.go"
+  },
+  {
+    "name": "Error",
+    "package": "runtime",
+    "bases": [
+      "error"
+    ],
+    "methods": [
+      "RuntimeError()"
+    ],
+    "filename": "runtime/error.go"
+  },
+  {
+    "name": "Interface",
+    "package": "sort",
+    "bases": [],
+    "methods": [
+      "Len() int",
+      "Less(i, j int) bool",
+      "Swap(i, j int)"
+    ],
+    "filename": "sort/sort.go"
+  },
+  {
+    "name": "Locker",
+    "package": "sync",
+    "bases": [],
+    "methods": [
+      "Lock()",
+      "Unlock()"
+    ],
+    "filename": "sync/mutex.go"
+  },
+  {
+    "name": "RawConn",
+    "package": "syscall",
+    "bases": [],
+    "methods": [
+      "Control(f func(fd uintptr)) error",
+      "Read(f func(fd uintptr) (done bool)) error",
+      "Write(f func(fd uintptr) (done bool)) error"
+    ],
+    "filename": "syscall/net.go"
+  },
+  {
+    "name": "Conn",
+    "package": "syscall",
+    "bases": [],
+    "methods": [
+      "SyscallConn() (RawConn, error)"
+    ],
+    "filename": "syscall/net.go"
+  },
+  {
+    "name": "RoutingMessage",
+    "package": "syscall",
+    "bases": [],
+    "methods": [],
+    "filename": "syscall/route_bsd.go"
+  },
+  {
+    "name": "Sockaddr",
+    "package": "syscall",
+    "bases": [],
+    "methods": [],
+    "filename": "syscall/syscall_unix.go"
+  },
+  {
+    "name": "Sockaddr",
+    "package": "syscall",
+    "bases": [],
+    "methods": [],
+    "filename": "syscall/syscall_windows.go"
+  },
+  {
+    "name": "Generator",
+    "package": "quick",
+    "bases": [],
+    "methods": [
+      "Generate(rand *rand.Rand, size int) reflect.Value"
+    ],
+    "filename": "testing/quick/quick.go"
+  },
+  {
+    "name": "TB",
+    "package": "testing",
+    "bases": [],
+    "methods": [
+      "Cleanup(func())",
+      "Error(args ...any)",
+      "Errorf(format string, args ...any)",
+      "Fail()",
+      "FailNow()",
+      "Failed() bool",
+      "Fatal(args ...any)",
+      "Fatalf(format string, args ...any)",
+      "Helper()",
+      "Log(args ...any)",
+      "Logf(format string, args ...any)",
+      "Name() string",
+      "Setenv(key, value string)",
+      "Skip(args ...any)",
+      "SkipNow()",
+      "Skipf(format string, args ...any)",
+      "Skipped() bool",
+      "TempDir() string"
+    ],
+    "filename": "testing/testing.go"
+  },
+  {
+    "name": "Node",
+    "package": "parse",
+    "bases": [],
+    "methods": [
+      "Type() NodeType",
+      "String() string",
+      "Copy() Node",
+      "Position() Pos"
+    ],
+    "filename": "text/template/parse/node.go"
+  }
+]

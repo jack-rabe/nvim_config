@@ -229,6 +229,7 @@ require('treesitter_setup')
 require('cmp_setup')
 require('keymaps')
 require('telescope_setup')
+require('picker')
 
 
 -- ✖»✕
