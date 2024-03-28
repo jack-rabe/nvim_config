@@ -35,7 +35,8 @@ local get_interfaces = function()
 end
 
 -- TODO in general, handle errors better
----@return string, string
+-- TODO rework this function to make more clear
+---@return string, string, integer
 local function get_node_under_cursor()
   local cursor = vim.api.nvim_win_get_cursor(0)
   local row, col = cursor[1] - 1, cursor[2]
@@ -45,11 +46,13 @@ local function get_node_under_cursor()
   end
   local root = parser:parse()[1]:root()
   local node = root:named_descendant_for_range(row, col, row, col)
+  local parent = node.parent(node)
+  local _, _, end_row, _ = parent:range()
 
   if node then
     local start_row, start_col, _, end_col = node:range()
     local node_text = vim.api.nvim_buf_get_text(0, start_row, start_col, start_row, end_col, {})[1]
-    return node_text, node:type()
+    return node_text, node:type(), end_row + 2
   else
     error("No Treesitter node found under cursor")
   end
@@ -75,19 +78,21 @@ local get_formatted_methods = function(interface, node, with_brackets)
   return lines
 end
 
+
 ---@param interface Go_Interface
 ---@param node string
 ---@param node_type string
-local add_methods = function(interface, node, node_type)
+---@param row_idx integer
+local add_methods = function(interface, node, node_type, row_idx)
   local lines = get_formatted_methods(interface, node, true)
   local cursor = vim.api.nvim_win_get_cursor(0)
   local row_to_insert = (cursor[1] - 1) - 1
-  vim.api.nvim_buf_set_lines(0, row_to_insert, row_to_insert, false, lines)
+  vim.api.nvim_buf_set_lines(0, row_idx, row_idx, false, lines)
 end
 
 -- TODO get opts from telescope
 local go_interfaces = function(opts)
-  local node, node_type = get_node_under_cursor()
+  local node, node_type, row_idx = get_node_under_cursor()
   -- TODO make treesitter checks that it's a type_identifier __for a struct__
   if node_type ~= "type_identifier" then
     print("got node_type == " .. node_type .. ", expected type_identifier")
@@ -114,7 +119,7 @@ local go_interfaces = function(opts)
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
         local selected_interface = action_state.get_selected_entry().value
-        add_methods(selected_interface, node, node_type)
+        add_methods(selected_interface, node, node_type, row_idx)
       end)
       return true
     end,
@@ -135,6 +140,8 @@ vim.keymap.set('n', '<leader>si', function()
     layout_config = {
       center = {
         anchor = "N",
+        width = .5,
+        -- TODO fix height
       },
     }
   })

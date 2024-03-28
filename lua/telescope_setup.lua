@@ -24,7 +24,7 @@ require('telescope').setup {
       },
       center = {
         anchor = "S",
-        width = 0.7
+        width = 0.7,
       },
     },
     sorting_strategy = 'ascending',
@@ -114,7 +114,11 @@ local nmap = function(keys, func, desc)
 end
 
 nmap('?', builtins.oldfiles, '[?] Find recently opened files')
-nmap('f', builtins.git_files, 'Search Git [F]iles')
+nmap('f', function()
+  if not pcall(builtins.git_files) then
+    builtins.find_files()
+  end
+end, 'Search Git [F]iles')
 nmap('sb', builtins.buffers, 'Find existing buffers')
 nmap('so', telescope_live_grep_open_files, '[S]earch in [O]pen Files')
 nmap('st', builtins.builtin, '[S]earch [T]elescope')
