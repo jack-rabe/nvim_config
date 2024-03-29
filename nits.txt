@@ -1,3 +1,4 @@
 tab for both snippets and completion cycling
 nicer cmp border and format - with theme
 oil what directory i open
+make better autopairs
