@@ -36,8 +36,8 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
   end,
 })
 
--- shows the names of attached lsp clients
-local function get_lsp()
+-- shows the names of attached lsp and formatting clients
+local function get_attached_clients()
   local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
   local clients = vim.lsp.get_active_clients()
   if next(clients) == nil then
@@ -50,6 +50,11 @@ local function get_lsp()
     if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
       table.insert(names, client.name)
     end
+  end
+
+  local formatters = require("conform").list_formatters()
+  for _, f in ipairs(formatters) do
+    table.insert(names, f.name)
   end
 
   if #names == 0 then
@@ -106,7 +111,7 @@ return {
       lualine_a = { { 'mode', fmt = function(str) return str:sub(1, 1) end } },
       lualine_b = { 'branch' },
       lualine_c = { 'filename', 'diagnostics', show_macro_recording, },
-      lualine_x = { 'diff', get_lsp },
+      lualine_x = { 'diff', get_attached_clients },
       lualine_y = { 'filetype' },
       lualine_z = { 'location' }
     },
