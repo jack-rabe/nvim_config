@@ -8,12 +8,14 @@ return {
         require("tokyonight").setup({
             ---@param colors ColorScheme
             on_colors = function(colors)
+                ---@diagnostic disable-next-line: inject-field
                 colors.bg = '#000000'
                 colors.bg_dark = '#000000'
+                colors.bg_float = '#000000'
                 colors.black = '#000000'
             end,
-            ---@param highlights Highlights
-            ---@param colors ColorScheme
+            ---@param hl Highlights
+            ---@param c ColorScheme
             on_highlights = function(hl, c)
                 hl.TelescopeNormal = {
                     bg = c.bg_dark,

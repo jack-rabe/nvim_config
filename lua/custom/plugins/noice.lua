@@ -3,7 +3,7 @@ return {
     event = "VeryLazy",
     opts = {
         presets = {
-            bottom_search = true,
+            -- bottom_search = true,
             lsp_doc_border = true
         },
         -- add any options here
