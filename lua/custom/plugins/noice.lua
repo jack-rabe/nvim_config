@@ -42,7 +42,7 @@ return {
             "rcarriga/nvim-notify",
             opts = {
                 stages = "static",
-                top_down = false
+                -- top_down = false
             }
         },
     },

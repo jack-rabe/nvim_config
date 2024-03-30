@@ -6,6 +6,7 @@ return {
             lsp_fallback = true,
         },
         formatters_by_ft = {
+            lua = { "stylua" },
             go = { "goimports", "bad" },
             javascript = { "prettier" },
             typescript = { "prettier" }

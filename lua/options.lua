@@ -19,7 +19,7 @@ vim.o.smartcase = true
 vim.wo.signcolumn = 'yes'
 -- Decrease update time
 vim.o.updatetime = 750
-vim.o.timeoutlen = 300
+vim.o.timeoutlen = 600
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this

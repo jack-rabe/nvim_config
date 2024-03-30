@@ -4,11 +4,11 @@ return {
     opts = {
         -- See `:help gitsigns.txt`
         signs = {
-            add = { text = '+' },
-            change = { text = '~' },
-            delete = { text = '_' },
-            topdelete = { text = '‾' },
-            changedelete = { text = '~' },
+            -- add = { text = '+' },
+            -- change = { text = '~' },
+            -- delete = { text = '_' },
+            -- topdelete = { text = '‾' },
+            -- changedelete = { text = '~' },
         },
         on_attach = function(bufnr)
             local gs = package.loaded.gitsigns
@@ -62,10 +62,6 @@ return {
             map('n', '<leader>hD', function()
                 gs.diffthis '~'
             end, { desc = 'git diff against last commit' })
-
-            -- Toggles
-            map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
-            map('n', '<leader>td', gs.toggle_deleted, { desc = 'toggle git show deleted' })
 
             -- Text object
             map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
