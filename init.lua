@@ -36,7 +36,9 @@ vim.api.nvim_create_autocmd('VimResized', {
 })
 
 require('lazy').setup({
+  -- TODO https://github.com/andrewferrier/debugprint.nvim
   {
+    -- TODO learn this
     'NeogitOrg/neogit',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -117,7 +119,6 @@ require('lazy').setup({
       },
     },
   },
-  -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
@@ -168,8 +169,9 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
     buffer = bufnr,
     callback = function()
+      local filetype = vim.bo[bufnr].filetype
       local tokens = vim.lsp.semantic_tokens.get_at_pos()
-      if tokens ~= nil then
+      if tokens ~= nil and filetype ~= 'svelte' then
         vim.lsp.buf.document_highlight()
       end
     end,
@@ -189,6 +191,7 @@ require('mason-lspconfig').setup()
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   clangd = {},
+  golangci_lint_ls = {},
   gopls = {},
   jdtls = {},
   hls = {},
@@ -243,13 +246,18 @@ require 'keymaps'
 require 'telescope_setup'
 require 'picker'
 
-require('leap').create_default_mappings()
-
 -- ✖»✕
 vim.diagnostic.config {
   virtual_text = {
     prefix = '»',
   },
 }
+
+-- TODO install gleam treesitter grammar
+-- require('lspconfig').gleam.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+-- }
+
 -- ocaml stuff
 -- set rtp^="/Users/jrabe/.opam/default/share/ocp-indent/vim"
