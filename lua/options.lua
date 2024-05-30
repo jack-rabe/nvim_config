@@ -24,6 +24,8 @@ vim.o.timeoutlen = 600
 vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+-- limit number of options shown in popup menus like cmp
+vim.opt.pumheight = 12
 
 -- sets how neovim will display certain whitespace in the editor.
 vim.opt.list = true

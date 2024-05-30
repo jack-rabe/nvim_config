@@ -5,18 +5,14 @@ require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
 cmp.setup {
+  -- enabled = function()
+  --   return (vim.bo.ft ~= 'markdown')
+  -- end,
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
   },
-  -- experimental = {
-  -- ghost_text = true
-  -- },
-  -- ---@diagnostic disable-next-line: missing-fields
-  -- performance = {
-  --   max_view_entries = 10,
-  -- },
   -- ---@diagnostic disable-next-line: missing-fields
   -- formatting = {
   --   format = function(entry, vim_item)
@@ -37,8 +33,8 @@ cmp.setup {
     ['<C-j>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-k>'] = cmp.mapping.select_prev_item(),
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,

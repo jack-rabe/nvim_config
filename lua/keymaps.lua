@@ -70,3 +70,8 @@ end, { desc = 'Harpoon previous file' })
 vim.keymap.set('n', "'n", function()
   harpoon:list():next()
 end, { desc = 'Harpoon next file' })
+
+-- Leap keymaps
+vim.keymap.set('n', 's', '<Plug>(leap)')
+vim.keymap.set({ 'x', 'o' }, 's', '<Plug>(leap-forward)')
+vim.keymap.set({ 'x', 'o' }, 'S', '<Plug>(leap-backward)')

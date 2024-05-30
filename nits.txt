@@ -1,4 +1,5 @@
 tab for both snippets and completion cycling
+hidden files not working correctly for telescope still (if in .gitignore)
 nicer cmp border and format - with theme
 oil what directory i open
 make better autopairs
