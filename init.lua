@@ -38,6 +38,13 @@ vim.api.nvim_create_autocmd('VimResized', {
 require('lazy').setup({
   -- TODO https://github.com/andrewferrier/debugprint.nvim
   {
+    {
+      'jack-rabe/impl.nvim',
+      dependencies = { 'nvim-telescope/telescope.nvim' },
+      config = function()
+        vim.keymap.set('n', '<leader>si', '<cmd>ImplSearch<cr>')
+      end,
+    },
     -- TODO learn this
     'NeogitOrg/neogit',
     dependencies = {
@@ -244,7 +251,6 @@ require 'treesitter_setup'
 require 'cmp_setup'
 require 'keymaps'
 require 'telescope_setup'
-require 'picker'
 
 -- ✖»✕
 vim.diagnostic.config {
