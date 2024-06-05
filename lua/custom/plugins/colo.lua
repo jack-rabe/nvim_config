@@ -79,6 +79,34 @@ local colorschemes = {
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
+  cyberdream = {
+    'scottmckendry/cyberdream.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colo 'cyberdream'
+    end,
+  },
+  melange = {
+    'savq/melange-nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colo 'melange'
+    end,
+  },
+  -- TODO: underline word under cursor
+  gruvbuddy = {
+    'tjdevries/colorbuddy.nvim',
+    config = function()
+      vim.cmd.colo 'gruvbuddy'
+    end,
+  },
 }
 
-return colorschemes.tokyonight
+-- vim.cmd.colo zaibatsu
+-- vim.cmd [[ highlight NormalFloat guibg=black ]]
+vim.cmd.colo 'retrobox'
+return {}
+
+-- return colorschemes.gruvbuddy
