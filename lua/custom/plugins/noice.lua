@@ -4,7 +4,7 @@ return {
   opts = {
     presets = {
       -- bottom_search = true,
-      lsp_doc_border = true,
+      -- lsp_doc_border = true,
     },
     lsp = {
       hover = {

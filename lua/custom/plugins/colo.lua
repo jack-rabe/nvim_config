@@ -1,7 +1,7 @@
-local colorschemes = {
-  kangagawa = {
+return {
+  {
     'rebelot/kanagawa.nvim',
-    lazy = false,
+    lazy = true,
     priority = 1000,
     config = function()
       vim.cmd.colo 'kanagawa'
@@ -18,22 +18,27 @@ local colorschemes = {
       end
     end,
   },
-  nightfox = {
+  { 'rose-pine/neovim', name = 'rose-pine', lazy = true, priority = 1000 },
+  {
     'EdenEast/nightfox.nvim',
-    lazy = false,
+    lazy = true,
     priority = 1000,
     config = function()
-      vim.cmd.colo 'nightfox'
+      vim.cmd.colo 'carbonfox'
     end,
   },
-  osaka = {
+  {
     'craftzdog/solarized-osaka.nvim',
+    lazy = true,
+    priority = 1000,
     name = 'osaka',
-    lazy = false,
+    config = function()
+      vim.cmd.colo 'solarized-osaka'
+    end,
   },
-  tokyonight = {
+  {
     'folke/tokyonight.nvim',
-    lazy = false,
+    lazy = true,
     priority = 1000,
     opts = {},
     config = function()
@@ -79,15 +84,15 @@ local colorschemes = {
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
-  cyberdream = {
+  {
     'scottmckendry/cyberdream.nvim',
-    lazy = false,
+    lazy = true,
     priority = 1000,
     config = function()
       vim.cmd.colo 'cyberdream'
     end,
   },
-  melange = {
+  {
     'savq/melange-nvim',
     lazy = false,
     priority = 1000,
@@ -96,7 +101,10 @@ local colorschemes = {
     end,
   },
   -- TODO: underline word under cursor
-  gruvbuddy = {
+  -- TODO: gitsigns highlight groups
+  {
+    lazy = true,
+    priority = 1000,
     'tjdevries/colorbuddy.nvim',
     config = function()
       vim.cmd.colo 'gruvbuddy'
@@ -106,7 +114,5 @@ local colorschemes = {
 
 -- vim.cmd.colo zaibatsu
 -- vim.cmd [[ highlight NormalFloat guibg=black ]]
-vim.cmd.colo 'retrobox'
-return {}
-
--- return colorschemes.gruvbuddy
+-- vim.cmd.colo 'retrobox'
+-- return {}

@@ -37,32 +37,27 @@ vim.api.nvim_create_autocmd('VimResized', {
 
 require('lazy').setup({
   -- TODO https://github.com/andrewferrier/debugprint.nvim
+  --
+  -- {
+  --
+  --   'jack-rabe/impl.nvim',
+  --   dependencies = { 'nvim-telescope/telescope.nvim' },
+  --   config = function()
+  --     vim.keymap.set('n', '<leader>si', '<cmd>ImplSearch<cr>')
+  --   end,
+  -- },
+  -- TODO learn this
   {
-    {
-      'jack-rabe/impl.nvim',
-      dependencies = { 'nvim-telescope/telescope.nvim' },
-      config = function()
-        vim.keymap.set('n', '<leader>si', '<cmd>ImplSearch<cr>')
-      end,
-    },
-    -- TODO learn this
     'NeogitOrg/neogit',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'sindrets/diffview.nvim', -- optional - Diff integration
-      'nvim-telescope/telescope.nvim', -- optional
+      'nvim-telescope/telescope.nvim',
     },
     config = true,
   },
   -- TODO try mini-surround?
   'tpope/vim-surround',
-  -- {
-  --   -- TODO gitsigns highlight groups
-  --   'tjdevries/colorbuddy.nvim',
-  --   config = function()
-  --     vim.cmd.colo 'gruvbuddy'
-  --   end,
-  -- },
   'ggandor/leap.nvim',
   'tpope/vim-sleuth',
   'tpope/vim-repeat',
@@ -107,7 +102,6 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
-  { 'numToStr/Comment.nvim', event = 'VeryLazy', opts = {} },
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
@@ -165,8 +159,9 @@ local on_attach = function(_, bufnr)
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-m>', vim.lsp.buf.signature_help, 'Signature Documentation')
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+  nmap('<C-m>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  -- vim.keymap.set('i', '<C-m>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature Documentation' })
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -266,4 +261,4 @@ vim.diagnostic.config {
 -- }
 
 -- ocaml stuff
--- set rtp^="/Users/jrabe/.opam/default/share/ocp-indent/vim"
+-- vim.opt.rtp:prepend '/Users/jrabe/.opam/default/share/ocp-indent/vim'

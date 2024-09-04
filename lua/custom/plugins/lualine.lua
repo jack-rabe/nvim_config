@@ -110,12 +110,14 @@ return {
       globalstatus = true,
     },
     sections = {
-      lualine_a = { {
-        'mode',
-        fmt = function(str)
-          return str:sub(1, 1)
-        end,
-      } },
+      lualine_a = {
+        {
+          'mode',
+          -- fmt = function(str)
+          --   return str:sub(1, 1)
+          -- end,
+        },
+      },
       lualine_b = { 'branch' },
       lualine_c = { 'filename', 'diagnostics', 'diff', show_macro_recording },
       lualine_x = { get_attached_clients },

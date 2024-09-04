@@ -20,8 +20,8 @@ vim.keymap.set('n', '<C-q>', function()
 end, { desc = '[Q]uit' })
 
 -- Oil keymaps
-vim.keymap.set('n', '<leader>oo', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
-vim.keymap.set('n', '<leader>of', '<CMD>Oil --float .<CR>', { desc = 'Open parent directory' })
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+-- vim.keymap.set('n', '<leader>of', '<CMD>Oil --float .<CR>', { desc = 'Open parent directory' })
 
 -- [[ Basic Keymaps ]]
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -45,10 +45,10 @@ end, { desc = '[N]oice [D]ismiss' })
 local harpoon = require 'harpoon'
 harpoon:setup { settings = { save_on_toggle = true } }
 
-vim.keymap.set('n', "'m", function()
-  harpoon:list():append()
-end, { desc = 'Harpoon list append file' })
 vim.keymap.set('n', "''", function()
+  harpoon:list():add()
+end, { desc = 'Harpoon list append file' })
+vim.keymap.set('n', "'m", function()
   harpoon.ui:toggle_quick_menu(harpoon:list())
 end, { desc = 'Harpoon toggle quick menu' })
 
