@@ -24,7 +24,7 @@ require('telescope').setup {
       },
       center = {
         anchor = 'S',
-        width = 0.7,
+        width = 0.8,
       },
     },
     sorting_strategy = 'ascending',
@@ -47,9 +47,6 @@ require('telescope').setup {
     },
   },
   pickers = {
-    lsp_references = {
-      layout_strategy = 'center',
-    },
     diagnostics = {
       layout_strategy = 'center',
     },
@@ -68,7 +65,7 @@ end
 
 nmap('?', builtins.oldfiles, '[?] Find recently opened files')
 nmap('f', function()
-  if not pcall(builtins.git_files) then
+  if not pcall(builtins.git_files, { show_untracked = true }) then
     builtins.find_files()
   end
 end, 'Search Git [F]iles')
@@ -81,7 +78,7 @@ nmap('sd', builtins.diagnostics, '[S]earch [D]iagnostics')
 nmap('ss', builtins.lsp_document_symbols, 'Document [S]ymbols')
 nmap('sc', builtins.commands, '[S]earch [C]ommand')
 vim.keymap.set('n', '<leader>:', builtins.command_history, { desc = 'Command History' })
-nmap('sy', builtins.lsp_dynamic_workspace_symbols, 'Workspace Symbols')
+nmap('sl', builtins.lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 nmap('sr', builtins.resume, '[S]earch Resume')
 nmap('sb', builtins.current_buffer_fuzzy_find, 'Current buffer fuzzy find')
 nmap('sf', function()

@@ -12,6 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   }
 end
+---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 local lspHighlightsGroup = vim.api.nvim_create_augroup('LspHighlightsGroup', { clear = true })
@@ -36,17 +37,11 @@ vim.api.nvim_create_autocmd('VimResized', {
 })
 
 require('lazy').setup({
-  -- TODO https://github.com/andrewferrier/debugprint.nvim
-  --
-  -- {
-  --
-  --   'jack-rabe/impl.nvim',
-  --   dependencies = { 'nvim-telescope/telescope.nvim' },
-  --   config = function()
-  --     vim.keymap.set('n', '<leader>si', '<cmd>ImplSearch<cr>')
-  --   end,
-  -- },
-  -- TODO learn this
+  {
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
   {
     'NeogitOrg/neogit',
     dependencies = {
@@ -253,11 +248,6 @@ vim.diagnostic.config {
   },
 }
 
--- TODO install gleam treesitter grammar
--- require('lspconfig').gleam.setup {
---   capabilities = capabilities,
---   on_attach = on_attach,
--- }
-
--- ocaml stuff
--- vim.opt.rtp:prepend '/Users/jrabe/.opam/default/share/ocp-indent/vim'
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldlevel = 99

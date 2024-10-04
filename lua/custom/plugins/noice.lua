@@ -3,7 +3,7 @@ return {
   event = 'VeryLazy',
   opts = {
     presets = {
-      -- bottom_search = true,
+      bottom_search = true,
       -- lsp_doc_border = true,
     },
     lsp = {
@@ -41,7 +41,7 @@ return {
       'rcarriga/nvim-notify',
       opts = {
         stages = 'static',
-        -- top_down = false
+        top_down = false,
       },
     },
   },
