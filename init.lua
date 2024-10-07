@@ -15,7 +15,7 @@ end
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-local lspHighlightsGroup = vim.api.nvim_create_augroup('LspHighlightsGroup', { clear = true })
+local lspHighlightsGroup = vim.api.nvim_create_augroup('LspHighlightsGroup', {})
 vim.api.nvim_create_autocmd('ColorScheme', {
   callback = function()
     local hl_groups = { 'LspReferenceText', 'LspReferenceRead', 'LspReferenceWrite' }
@@ -28,10 +28,19 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 })
 
 -- make windows equal size after resizing vim pane
-local resizeGroup = vim.api.nvim_create_augroup('ResizeGroup', { clear = true })
+local resizeGroup = vim.api.nvim_create_augroup('ResizeGroup', {})
 vim.api.nvim_create_autocmd('VimResized', {
   callback = function()
     vim.cmd 'wincmd ='
+  end,
+  group = resizeGroup,
+})
+
+-- make windows equal size after resizing vim pane
+local autodismissNoiceGroup = vim.api.nvim_create_augroup('AutodismissNoice', {})
+vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+  callback = function()
+    require('noice').cmd 'dismiss'
   end,
   group = resizeGroup,
 })
