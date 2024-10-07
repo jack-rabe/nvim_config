@@ -45,10 +45,10 @@ end, { desc = '[N]oice [D]ismiss' })
 local harpoon = require 'harpoon'
 harpoon:setup { settings = { save_on_toggle = true } }
 
-vim.keymap.set('n', "''", function()
+vim.keymap.set('n', "'m", function()
   harpoon:list():add()
 end, { desc = 'Harpoon list append file' })
-vim.keymap.set('n', "'m", function()
+vim.keymap.set('n', "''", function()
   harpoon.ui:toggle_quick_menu(harpoon:list())
 end, { desc = 'Harpoon toggle quick menu' })
 

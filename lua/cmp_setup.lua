@@ -1,4 +1,3 @@
--- [[ Configure nvim-cmp ]]
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
@@ -18,11 +17,21 @@ cmp.setup {
     completeopt = 'menu,menuone,noinsert,noselect',
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-j>'] = cmp.mapping.select_next_item(),
-    ['<C-k>'] = cmp.mapping.select_prev_item(),
-    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-d>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
+    ['<C-j>'] = cmp.mapping(function()
+      cmp.select_next_item()
+    end, { 'i', 'c' }),
+    ['<C-k>'] = cmp.mapping(function()
+      cmp.select_prev_item()
+    end, { 'i', 'c' }),
+    ['<C-u>'] = cmp.mapping(function()
+      cmp.scroll_docs(-4)
+    end, { 'i', 'c' }),
+    ['<C-d>'] = cmp.mapping(function()
+      cmp.scroll_docs(4)
+    end, { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(function()
+      cmp.complete {}
+    end, { 'i', 'c' }),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
@@ -45,6 +54,21 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'buffer' },
     { name = 'path' },
   },
 }
+
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' },
+  }, {
+    {
+      name = 'cmdline',
+      option = {
+        ignore_cmds = { 'Man', '!' },
+      },
+    },
+  }),
+})
