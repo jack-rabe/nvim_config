@@ -40,7 +40,11 @@ require('lazy').setup({
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
-    opts = {},
+    ---@class wk.Opts
+    opts = {
+      preset = 'helix',
+      delay = 300,
+    },
   },
   {
     'NeogitOrg/neogit',
