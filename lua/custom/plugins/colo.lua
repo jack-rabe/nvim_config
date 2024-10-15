@@ -19,7 +19,7 @@ return {
   },
   {
     'folke/tokyonight.nvim',
-    lazy = true,
+    lazy = false,
     priority = 1000,
     opts = {},
     config = function()
@@ -67,7 +67,7 @@ return {
   },
   {
     'scottmckendry/cyberdream.nvim',
-    lazy = false,
+    lazy = true,
     priority = 1000,
     config = function()
       vim.cmd.colo 'cyberdream'

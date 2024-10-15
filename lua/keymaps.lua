@@ -4,10 +4,6 @@ vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete to _ register'
 vim.keymap.set('n', 'ga', '<C-^>', { desc = 'Go to alternate file' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
-vim.keymap.set('n', '<C-h>', '<C-w>h')
-vim.keymap.set('n', '<C-j>', '<C-w>j')
-vim.keymap.set('n', '<C-k>', '<C-w>k')
-vim.keymap.set('n', '<C-l>', '<C-w>l')
 vim.keymap.set('n', '<leader>y', ':let @+ = expand("%")<cr>)', { desc = '[Y]ank filename' })
 vim.keymap.set('n', '<leader>w', function()
   vim.api.nvim_command 'update'
@@ -37,6 +33,23 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>nl', function()
   require('noice').cmd 'last'
 end, { desc = '[N]oice [L]ast' })
+
+-- Noice keymaps
+local neogit = require 'neogit'
+vim.keymap.set('n', '<leader>gg', function()
+  neogit.open()
+end, { desc = 'Open Neogit' })
+
+local diffview = require 'diffview'
+vim.keymap.set('n', '<leader>gd', function()
+  diffview.open {}
+end, { desc = 'Open Diffview' })
+vim.keymap.set('n', '<leader>gf', function()
+  vim.cmd [[ DiffviewFileHistory % ]]
+end, { desc = 'Diffview File History' })
+vim.keymap.set('n', '<leader>gc', function()
+  diffview.close()
+end, { desc = 'Close Diffview' })
 
 -- Harpoon keymaps
 local harpoon = require 'harpoon'

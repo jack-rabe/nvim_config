@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd('VimResized', {
 local autodismissNoiceGroup = vim.api.nvim_create_augroup('AutodismissNoice', {})
 vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
   callback = function()
-    require('noice').cmd 'dismiss'
+    pcall(require('noice').cmd, 'dismiss')
   end,
   group = resizeGroup,
 })
@@ -159,6 +159,7 @@ local on_attach = function(_, bufnr)
 
   nmap('<leader>r', vim.lsp.buf.rename, '[R]ename')
   nmap('<leader>c', vim.lsp.buf.code_action, '[C]ode Action')
+  nmap('<leader>lf', vim.lsp.buf.format, 'Format')
 
   nmap('gd', function()
     require('telescope.builtin').lsp_definitions { show_line = false }
