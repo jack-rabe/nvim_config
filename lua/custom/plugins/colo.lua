@@ -1,5 +1,13 @@
 return {
-  { 'rose-pine/neovim', name = 'rose-pine', lazy = true, priority = 1000 },
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine',
+    lazy = true,
+    priority = 1000,
+    config = function()
+      vim.cmd.colo 'carbonfox'
+    end,
+  },
   {
     'EdenEast/nightfox.nvim',
     lazy = true,

@@ -50,38 +50,3 @@ end, { desc = 'Diffview File History' })
 vim.keymap.set('n', '<leader>gc', function()
   diffview.close()
 end, { desc = 'Close Diffview' })
-
--- Harpoon keymaps
-local harpoon = require 'harpoon'
-harpoon:setup { settings = { save_on_toggle = true } }
-
-vim.keymap.set('n', "'m", function()
-  harpoon:list():add()
-end, { desc = 'Harpoon list append file' })
-vim.keymap.set('n', "''", function()
-  harpoon.ui:toggle_quick_menu(harpoon:list())
-end, { desc = 'Harpoon toggle quick menu' })
-
-vim.keymap.set('n', "'a", function()
-  harpoon:list():select(1)
-end, { desc = 'Navigate to harpoon file 1' })
-vim.keymap.set('n', "'s", function()
-  harpoon:list():select(2)
-end, { desc = 'Navigate to harpoon file 2' })
-vim.keymap.set('n', "'d", function()
-  harpoon:list():select(3)
-end, { desc = 'Navigate to harpoon file 3' })
-vim.keymap.set('n', "'f", function()
-  harpoon:list():select(4)
-end, { desc = 'Navigate to harpoon file 4' })
-vim.keymap.set('n', "'p", function()
-  harpoon:list():prev()
-end, { desc = 'Harpoon previous file' })
-vim.keymap.set('n', "'n", function()
-  harpoon:list():next()
-end, { desc = 'Harpoon next file' })
-
--- Leap keymaps
-vim.keymap.set('n', 's', '<Plug>(leap)')
-vim.keymap.set({ 'x', 'o' }, 's', '<Plug>(leap-forward)')
-vim.keymap.set({ 'x', 'o' }, 'S', '<Plug>(leap-backward)')

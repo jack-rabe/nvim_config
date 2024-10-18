@@ -63,41 +63,6 @@ local function get_attached_clients()
   return table.concat(names, ' | ')
 end
 
----@diagnostic disable-next-line: unused-function
-local function get_harpoon_files()
-  local filenames = {}
-  local keys = { 'a', 's', 'd', 'f' }
-  local current_file = vim.fn.expand '%:p'
-  local harpooned_files = require('harpoon'):list().items
-
-  for idx, harpooned_file in pairs(harpooned_files) do
-    if idx > 4 then
-      break
-    end
-
-    local path_in_repo = harpooned_file.value
-    local filename = path_in_repo:match '[^/]+$'
-    local file_is_active = current_file:match('.*' .. path_in_repo) ~= nil
-    if file_is_active then
-      table.insert(filenames, '⚓' .. filename)
-    else
-      table.insert(filenames, '[' .. keys[idx] .. '] ' .. filename)
-    end
-  end
-
-  local result = ''
-  local max_width = vim.o.columns * 2 / 5
-  for _, filename in pairs(filenames) do
-    local tmp = result .. ' | ' .. filename
-    if string.len(tmp) < max_width then
-      result = tmp
-    else
-      return result .. '| ...'
-    end
-  end
-  return result
-end
-
 return {
   -- Set lualine as statusline
   'nvim-lualine/lualine.nvim',

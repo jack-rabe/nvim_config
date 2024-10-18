@@ -66,7 +66,6 @@ require('lazy').setup({
   },
   -- TODO try mini-surround?
   'tpope/vim-surround',
-  'ggandor/leap.nvim',
   'tpope/vim-sleuth',
   'tpope/vim-repeat',
   -- NOTE: This is where your plugins related to LSP can be installed.
@@ -104,6 +103,30 @@ require('lazy').setup({
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
     opts = {},
+  },
+  {
+    'otavioschwanck/arrow.nvim',
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } },
+    opts = {
+      show_icons = true,
+      mappings = {
+        edit = 'e',
+        delete_mode = 'D',
+        clear_all_items = 'C',
+        toggle = 'S', -- used as save if separate_save_and_remove is true
+        open_vertical = 'v',
+        open_horizontal = 'x',
+        quit = 'q',
+        next_item = ']',
+        prev_item = '[',
+      },
+      per_buffer_config = {
+        lines = 6, -- Number of lines showed on preview.
+      },
+      leader_key = "'", -- Recommended to be a single key
+      buffer_leader_key = 'm', -- Per Buffer Mappings
+      index_keys = 'asdfghjkl',
+    },
   },
   {
     'nvim-treesitter/nvim-treesitter',
