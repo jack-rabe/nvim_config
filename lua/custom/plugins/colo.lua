@@ -5,7 +5,7 @@ return {
     lazy = true,
     priority = 1000,
     config = function()
-      vim.cmd.colo 'carbonfox'
+      vim.cmd.colo 'rose-pine'
     end,
   },
   {
@@ -14,6 +14,18 @@ return {
     priority = 1000,
     config = function()
       vim.cmd.colo 'carbonfox'
+    end,
+  },
+  {
+    'navarasu/onedark.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = { style = 'deep' },
+    config = function()
+      require('onedark').setup {
+        style = 'deep',
+      }
+      vim.cmd.colo 'onedark'
     end,
   },
   {
@@ -27,7 +39,7 @@ return {
   },
   {
     'folke/tokyonight.nvim',
-    lazy = false,
+    lazy = true,
     priority = 1000,
     opts = {},
     config = function()
