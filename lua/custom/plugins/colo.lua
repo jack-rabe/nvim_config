@@ -26,6 +26,8 @@ return {
         style = 'deep',
       }
       vim.cmd.colo 'onedark'
+      local c = require 'onedark.colors'
+      vim.cmd [[highlight FloatBorder guibg=c.b0]]
     end,
   },
   {

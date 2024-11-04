@@ -120,6 +120,9 @@ require('lazy').setup({
         next_item = ']',
         prev_item = '[',
       },
+      window = {
+        border = 'none',
+      },
       per_buffer_config = {
         lines = 6, -- Number of lines showed on preview.
       },
