@@ -15,36 +15,6 @@ end
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-local lspHighlightsGroup = vim.api.nvim_create_augroup('LspHighlightsGroup', {})
-vim.api.nvim_create_autocmd('ColorScheme', {
-  callback = function()
-    local hl_groups = { 'LspReferenceText', 'LspReferenceRead', 'LspReferenceWrite' }
-    for _, g in ipairs(hl_groups) do
-      vim.cmd('highlight clear ' .. g)
-      vim.cmd('highlight ' .. g .. ' cterm=underline,bold gui=underline,bold')
-    end
-  end,
-  group = lspHighlightsGroup,
-})
-
--- make windows equal size after resizing vim pane
-local resizeGroup = vim.api.nvim_create_augroup('ResizeGroup', {})
-vim.api.nvim_create_autocmd('VimResized', {
-  callback = function()
-    vim.cmd 'wincmd ='
-  end,
-  group = resizeGroup,
-})
-
--- make windows equal size after resizing vim pane
-local autodismissNoiceGroup = vim.api.nvim_create_augroup('AutodismissNoice', {})
-vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-  callback = function()
-    pcall(require('noice').cmd, 'dismiss')
-  end,
-  group = resizeGroup,
-})
-
 require('lazy').setup({
   {
     'folke/which-key.nvim',
@@ -69,7 +39,6 @@ require('lazy').setup({
   'tpope/vim-sleuth',
   'tpope/vim-repeat',
   -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
   {
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -78,7 +47,7 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
 
       -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      -- consider https://github.com/folke/lazydev.nvim?
     },
   },
   {
@@ -105,38 +74,29 @@ require('lazy').setup({
     opts = {},
   },
   {
-    'otavioschwanck/arrow.nvim',
-    dependencies = { { 'nvim-tree/nvim-web-devicons' } },
-    opts = {
-      show_icons = true,
-      mappings = {
-        edit = 'e',
-        delete_mode = 'D',
-        clear_all_items = 'C',
-        toggle = 'S', -- used as save if separate_save_and_remove is true
-        open_vertical = 'v',
-        open_horizontal = 'x',
-        quit = 'q',
-        next_item = ']',
-        prev_item = '[',
-      },
-      window = {
-        border = 'none',
-      },
-      per_buffer_config = {
-        lines = 6, -- Number of lines showed on preview.
-      },
-      leader_key = "'", -- Recommended to be a single key
-      buffer_leader_key = 'm', -- Per Buffer Mappings
-      index_keys = 'asdfghjkl',
-    },
-  },
-  {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
+  },
+  {
+    'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-neotest/nvim-nio',
+      'nvim-lua/plenary.nvim',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      { 'fredrikaverpil/neotest-golang', version = '*' }, -- tracks official releases
+    },
+    config = function()
+      ---@diagnostic disable-next-line: missing-fields
+      require('neotest').setup {
+        adapters = {
+          require 'neotest-golang',
+        },
+      }
+    end,
   },
   {
     'nvim-telescope/telescope.nvim',
@@ -162,6 +122,15 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 }, {})
 
+-- make windows equal size after resizing vim pane
+local resizeGroup = vim.api.nvim_create_augroup('ResizeGroup', {})
+vim.api.nvim_create_autocmd('VimResized', {
+  callback = function()
+    vim.cmd 'wincmd ='
+  end,
+  group = resizeGroup,
+})
+
 -- [[ Highlight on yank ]]
 local yank_highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -172,124 +141,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- [[ Configure LSP ]]
---  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
-
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-  end
-
-  nmap('<leader>r', vim.lsp.buf.rename, '[R]ename')
-  nmap('<leader>c', vim.lsp.buf.code_action, '[C]ode Action')
-  nmap('<leader>lf', vim.lsp.buf.format, 'Format')
-
-  nmap('gd', function()
-    require('telescope.builtin').lsp_definitions { show_line = false }
-  end, '[G]oto [D]efinition')
-  nmap('gr', function()
-    require('telescope.builtin').lsp_references { show_line = false }
-  end, '[G]oto [R]eferences')
-  nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-  nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<C-m>', vim.lsp.buf.signature_help, 'Signature Documentation')
-  -- vim.keymap.set('i', '<C-m>', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature Documentation' })
-
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
-
-  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-    buffer = bufnr,
-    callback = function()
-      local filetype = vim.bo[bufnr].filetype
-      local tokens = vim.lsp.semantic_tokens.get_at_pos()
-      if tokens ~= nil and filetype ~= 'svelte' then
-        vim.lsp.buf.document_highlight()
-      end
-    end,
-  })
-  vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-    buffer = bufnr,
-    callback = vim.lsp.buf.clear_references,
-  })
-end
-
--- mason-lspconfig requires that these setup functions are called in this order
--- before setting up the servers.
-require('mason').setup()
-require('mason-lspconfig').setup()
-
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
-local servers = {
-  clangd = {},
-  gopls = {},
-  jdtls = {},
-  hls = {},
-  pyright = {},
-  rust_analyzer = {},
-  tsserver = {},
-  tailwindcss = {},
-  html = {},
-  ocamllsp = {},
-  jsonls = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-      -- diagnostics = { disable = { 'missing-fields' } },
-    },
-  },
-}
-
--- Setup neovim lua configuration
-require('neodev').setup()
-
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end,
-}
-
+require 'lsp'
 require 'options'
 require 'treesitter_setup'
 require 'cmp_setup'
 require 'keymaps'
 require 'telescope_setup'
-
--- ✖»✕
-vim.diagnostic.config {
-  virtual_text = {
-    prefix = '»',
-  },
-}
-
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-vim.opt.foldlevel = 99

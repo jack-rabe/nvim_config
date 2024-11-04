@@ -18,12 +18,12 @@ return {
   },
   {
     'navarasu/onedark.nvim',
-    lazy = false,
+    lazy = true,
     priority = 1000,
     opts = { style = 'deep' },
     config = function()
       require('onedark').setup {
-        style = 'deep',
+        style = 'warmer',
       }
       vim.cmd.colo 'onedark'
       local c = require 'onedark.colors'
@@ -104,7 +104,7 @@ return {
     end,
   },
   {
-    lazy = true,
+    lazy = false,
     priority = 1000,
     'tjdevries/colorbuddy.nvim',
     config = function()

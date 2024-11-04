@@ -1,3 +1,11 @@
+local autodismissNoiceGroup = vim.api.nvim_create_augroup('AutodismissNoiceGroup', {})
+vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+  callback = function()
+    pcall(require('noice').cmd, 'dismiss')
+  end,
+  group = autodismissNoiceGroup,
+})
+
 return {
   'folke/noice.nvim',
   event = 'VeryLazy',

@@ -30,3 +30,12 @@ vim.opt.pumheight = 12
 -- sets how neovim will display certain whitespace in the editor.
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', nbsp = '␣', eol = '↵' }
+vim.diagnostic.config {
+  virtual_text = {
+    prefix = '»',
+  },
+}
+
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldlevel = 99
