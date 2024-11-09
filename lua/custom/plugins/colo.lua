@@ -20,7 +20,6 @@ return {
     'navarasu/onedark.nvim',
     lazy = true,
     priority = 1000,
-    opts = { style = 'deep' },
     config = function()
       require('onedark').setup {
         style = 'warmer',

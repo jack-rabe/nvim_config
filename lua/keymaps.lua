@@ -19,7 +19,7 @@ end, { desc = '[Q]uit' })
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 -- vim.keymap.set('n', '<leader>of', '<CMD>Oil --float .<CR>', { desc = 'Open parent directory' })
 
--- [[ Basic Keymaps ]]
+-- Basic Keymaps
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -34,12 +34,13 @@ vim.keymap.set('n', '<leader>nl', function()
   require('noice').cmd 'last'
 end, { desc = '[N]oice [L]ast' })
 
--- Noice keymaps
+-- Neogit keymaps
 local neogit = require 'neogit'
 vim.keymap.set('n', '<leader>gg', function()
   neogit.open()
 end, { desc = 'Open Neogit' })
 
+-- Diffview keymaps
 local diffview = require 'diffview'
 vim.keymap.set('n', '<leader>gd', function()
   diffview.open {}
@@ -50,3 +51,12 @@ end, { desc = 'Diffview File History' })
 vim.keymap.set('n', '<leader>gc', function()
   diffview.close()
 end, { desc = 'Close Diffview' })
+
+-- Overseer keymaps
+local overseer = require 'overseer'
+vim.keymap.set('n', '<leader>or', function()
+  overseer.open()
+end, { desc = 'Overseer Open' })
+vim.keymap.set('n', '<leader>or', function()
+  vim.cmd [[OverseerRun]]
+end, { desc = 'Overseer Run' })
