@@ -10,6 +10,9 @@ return {
       go = { 'goimports', 'gofmt' },
       javascript = { 'prettier' },
       typescript = { 'prettier' },
+      heex = { 'mix' },
+      elixir = { 'mix' },
+      eelixir = { 'mix' },
     },
   },
 }
