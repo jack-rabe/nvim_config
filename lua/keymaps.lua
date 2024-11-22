@@ -1,4 +1,7 @@
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<cr>')
+vim.keymap.set('n', '<Esc>', function()
+  pcall(require('noice').cmd, 'dismiss')
+  vim.cmd [[ nohlsearch ]]
+end)
 vim.keymap.set({ 'n', 'v' }, 'x', '"_x')
 vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete to _ register' })
 vim.keymap.set('n', 'ga', '<C-^>', { desc = 'Go to alternate file' })

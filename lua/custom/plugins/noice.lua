@@ -1,11 +1,3 @@
-local autodismissNoiceGroup = vim.api.nvim_create_augroup('AutodismissNoiceGroup', {})
-vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-  callback = function()
-    pcall(require('noice').cmd, 'dismiss')
-  end,
-  group = autodismissNoiceGroup,
-})
-
 return {
   'folke/noice.nvim',
   event = 'VeryLazy',
@@ -16,7 +8,7 @@ return {
     },
     lsp = {
       hover = {
-        enabled = false,
+        silent = true,
       },
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
       override = {
