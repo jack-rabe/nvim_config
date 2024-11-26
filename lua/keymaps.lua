@@ -36,6 +36,17 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>nl', function()
   require('noice').cmd 'last'
 end, { desc = '[N]oice [L]ast' })
+vim.keymap.set({ 'n', 'i', 's' }, '<c-d>', function()
+  if not require('noice.lsp').scroll(4) then
+    return '<c-d>'
+  end
+end, { silent = true, expr = true })
+
+vim.keymap.set({ 'n', 'i', 's' }, '<c-u>', function()
+  if not require('noice.lsp').scroll(-4) then
+    return '<c-u>'
+  end
+end, { silent = true, expr = true })
 
 -- Neogit keymaps
 local neogit = require 'neogit'

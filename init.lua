@@ -69,6 +69,13 @@ require('lazy').setup({
     },
   },
   {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
+  {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
     opts = {},
@@ -80,24 +87,24 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
-  {
-    'nvim-neotest/neotest',
-    dependencies = {
-      'nvim-neotest/nvim-nio',
-      'nvim-lua/plenary.nvim',
-      'antoinemadec/FixCursorHold.nvim',
-      'nvim-treesitter/nvim-treesitter',
-      { 'fredrikaverpil/neotest-golang', version = '*' }, -- tracks official releases
-    },
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('neotest').setup {
-        adapters = {
-          require 'neotest-golang',
-        },
-      }
-    end,
-  },
+  -- {
+  --   'nvim-neotest/neotest',
+  --   dependencies = {
+  --     'nvim-neotest/nvim-nio',
+  --     'nvim-lua/plenary.nvim',
+  --     'antoinemadec/FixCursorHold.nvim',
+  --     'nvim-treesitter/nvim-treesitter',
+  --     { 'fredrikaverpil/neotest-golang', version = '*' }, -- tracks official releases
+  --   },
+  --   config = function()
+  --     ---@diagnostic disable-next-line: missing-fields
+  --     require('neotest').setup {
+  --       adapters = {
+  --         require 'neotest-golang',
+  --       },
+  --     }
+  --   end,
+  -- },
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
