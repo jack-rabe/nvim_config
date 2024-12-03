@@ -1,3 +1,11 @@
+local wk = require 'which-key'
+wk.add {
+  { '<leader>p', group = '[p]ersistence' },
+  { '<leader>g', group = 'git/diffview' },
+  { '<leader>o', group = '[o]verseer' },
+  { '<leader>s', group = '[s]earch' },
+}
+
 vim.keymap.set('n', '<Esc>', function()
   pcall(require('noice').cmd, 'dismiss')
   vim.cmd [[ nohlsearch ]]
@@ -70,7 +78,28 @@ end, { desc = 'Close Diffview' })
 local overseer = require 'overseer'
 vim.keymap.set('n', '<leader>or', function()
   overseer.open()
-end, { desc = 'Overseer Open' })
+end, { desc = '[O]verseer [O]pen' })
 vim.keymap.set('n', '<leader>or', function()
   vim.cmd [[OverseerRun]]
 end, { desc = 'Overseer Run' })
+
+-- persistence keymaps
+-- load the session for the current directory
+vim.keymap.set('n', '<leader>ps', function()
+  require('persistence').load()
+end, { desc = 'Persistence Load' })
+
+-- select a session to load
+vim.keymap.set('n', '<leader>pS', function()
+  require('persistence').select()
+end, { desc = 'Persistence Select' })
+
+-- load the last session
+vim.keymap.set('n', '<leader>pl', function()
+  require('persistence').load { last = true }
+end, { desc = 'Persistence Load Last' })
+
+-- stop Persistence => session won't be saved on exit
+vim.keymap.set('n', '<leader>pd', function()
+  require('persistence').stop()
+end, { desc = 'Persistence Stop' })

@@ -16,6 +16,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+
+  {
+    'folke/persistence.nvim',
+    event = 'BufReadPre', -- this will only start session saving when an actual file was opened
+    opts = {},
+  },
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
@@ -145,6 +151,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank { timeout = 75 }
   end,
   group = yank_highlight_group,
+  pattern = '*',
+})
+
+-- [[ Load a persisted session if it exists]]
+local persist_group = vim.api.nvim_create_augroup('PersistLoad', { clear = true })
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    vim.cmd [[Oil]]
+    require('persistence').load()
+  end,
+  group = persist_group,
   pattern = '*',
 })
 
