@@ -96,14 +96,14 @@ return {
   },
   {
     'savq/melange-nvim',
-    lazy = true,
+    lazy = false,
     priority = 1000,
     config = function()
       vim.cmd.colo 'melange'
     end,
   },
   {
-    lazy = false,
+    lazy = true,
     priority = 1000,
     'tjdevries/colorbuddy.nvim',
     config = function()

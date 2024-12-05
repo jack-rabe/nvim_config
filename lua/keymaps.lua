@@ -4,6 +4,7 @@ wk.add {
   { '<leader>g', group = 'git/diffview' },
   { '<leader>o', group = '[o]verseer' },
   { '<leader>s', group = '[s]earch' },
+  { '<leader>h', group = 'gitsigns' },
 }
 
 vim.keymap.set('n', '<Esc>', function()
