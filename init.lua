@@ -161,4 +161,7 @@ require 'keymaps'
 require 'telescope_setup'
 
 -- [[ Load a persisted session if it exists]]
-require('persistence').load()
+local argc = vim.fn.argc()
+if argc == 0 then
+  require('persistence').load()
+end
