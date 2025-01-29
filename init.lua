@@ -39,7 +39,6 @@ require('lazy').setup({
     },
     config = true,
   },
-  -- TODO try mini-surround?
   'tpope/vim-surround',
   'tpope/vim-sleuth',
   'tpope/vim-repeat',
@@ -73,13 +72,13 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
-  {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = {},
-  },
+  -- {
+  --   'MeanderingProgrammer/render-markdown.nvim',
+  --   dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+  --   ---@module 'render-markdown'
+  --   ---@type render.md.UserConfig
+  --   opts = {},
+  -- },
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
