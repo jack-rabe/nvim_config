@@ -86,12 +86,12 @@ end, { desc = 'Overseer Run' })
 
 -- persistence keymaps
 -- load the session for the current directory
-vim.keymap.set('n', '<leader>ps', function()
+vim.keymap.set('n', '<leader>pS', function()
   require('persistence').load()
 end, { desc = 'Persistence Load' })
 
 -- select a session to load
-vim.keymap.set('n', '<leader>pS', function()
+vim.keymap.set('n', '<leader>ps', function()
   require('persistence').select()
 end, { desc = 'Persistence Select' })
 
