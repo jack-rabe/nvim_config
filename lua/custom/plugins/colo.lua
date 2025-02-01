@@ -1,7 +1,7 @@
 return {
   {
     'EdenEast/nightfox.nvim',
-    lazy = true,
+    lazy = false,
     priority = 1000,
     config = function()
       vim.cmd.colo 'carbonfox'
@@ -21,17 +21,8 @@ return {
     end,
   },
   {
-    'craftzdog/solarized-osaka.nvim',
-    lazy = true,
-    priority = 1000,
-    name = 'osaka',
-    config = function()
-      vim.cmd.colo 'solarized-osaka'
-    end,
-  },
-  {
     'folke/tokyonight.nvim',
-    lazy = false,
+    lazy = true,
     priority = 1000,
     opts = {},
     config = function()

@@ -44,17 +44,27 @@ local function get_attached_clients()
     return ''
   end
 
+  local name_set = {}
   local names = {}
+
+  -- Add LSP clients
   for _, client in ipairs(clients) do
     local filetypes = client.config.filetypes
     if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-      table.insert(names, client.name)
+      if not name_set[client.name] then
+        name_set[client.name] = true
+        table.insert(names, client.name)
+      end
     end
   end
 
+  -- Add formatters
   local formatters = require('conform').list_formatters()
   for _, f in ipairs(formatters) do
-    table.insert(names, f.name)
+    if not name_set[f.name] then
+      name_set[f.name] = true
+      table.insert(names, f.name)
+    end
   end
 
   if #names == 0 then
