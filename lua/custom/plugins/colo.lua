@@ -1,23 +1,18 @@
 return {
   {
-    'EdenEast/nightfox.nvim',
+    'lunacookies/vim-colors-xcode',
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colo 'carbonfox'
+      -- vim.cmd.colo 'xcodedarkhc'
     end,
   },
   {
-    'navarasu/onedark.nvim',
+    'EdenEast/nightfox.nvim',
     lazy = true,
     priority = 1000,
     config = function()
-      require('onedark').setup {
-        style = 'warmer',
-      }
-      vim.cmd.colo 'onedark'
-      local c = require 'onedark.colors'
-      vim.cmd [[highlight FloatBorder guibg=c.b0]]
+      vim.cmd.colo 'carbonfox'
     end,
   },
   {

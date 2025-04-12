@@ -164,3 +164,5 @@ local argc = vim.fn.argc()
 if argc == 0 then
   require('persistence').load()
 end
+
+vim.cmd.colo 'xcodedarkhc'
