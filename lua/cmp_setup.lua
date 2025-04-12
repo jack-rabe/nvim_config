@@ -56,6 +56,10 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'buffer', keyword_length = 5 },
     { name = 'path' },
+    {
+      name = 'lazydev',
+      group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+    },
   },
 }
 
