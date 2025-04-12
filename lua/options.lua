@@ -31,9 +31,10 @@ vim.opt.pumheight = 12
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', nbsp = '␣', eol = '↵' }
 vim.diagnostic.config {
-  virtual_text = {
-    prefix = '»',
-  },
+  virtual_lines = true,
+  -- virtual_text = {
+  --   prefix = '»',
+  -- },
 }
 
 vim.opt.foldmethod = 'expr'

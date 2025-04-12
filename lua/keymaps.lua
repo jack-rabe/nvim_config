@@ -134,3 +134,11 @@ end, { desc = 'Harpoon previous file' })
 vim.keymap.set('n', "'n", function()
   harpoon:list():next()
 end, { desc = 'Harpoon next file' })
+
+vim.keymap.set('n', '<leader>tt', function()
+  local new_config = {
+    virtual_lines = not vim.diagnostic.config().virtual_lines,
+    virtual_text = not vim.diagnostic.config().virtual_text,
+  }
+  vim.diagnostic.config(new_config)
+end, { desc = 'Toggle diagnostic virtual_lines' })
