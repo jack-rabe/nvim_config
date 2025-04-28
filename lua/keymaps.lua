@@ -12,7 +12,6 @@ vim.keymap.set('n', '<Esc>', function()
   vim.cmd [[ nohlsearch ]]
 end)
 vim.keymap.set({ 'n', 'v' }, 'x', '"_x')
-vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete to _ register' })
 vim.keymap.set('n', 'ga', '<C-^>', { desc = 'Go to alternate file' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')

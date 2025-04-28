@@ -22,6 +22,8 @@ require('lazy').setup({
     ft = 'lua', -- only load on lua files
     opts = {
       library = {
+        'nvim-dap-ui',
+        'nvim-dap',
         -- See the configuration section for more details
         -- Load luvit types when the `vim.uv` word is found
         -- { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
@@ -139,7 +141,7 @@ require('lazy').setup({
       },
     },
   },
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
 
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'custom.plugins' },
